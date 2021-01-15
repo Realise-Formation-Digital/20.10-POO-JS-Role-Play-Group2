@@ -30,7 +30,7 @@
         
 
         //instance de la class joueur
-        var joueur1 = new joueur(joueur1);
+        var joueur1 = new joueur('joueur1');
 
 
     
