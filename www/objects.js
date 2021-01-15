@@ -18,3 +18,23 @@ var joueur = {
   };
 
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function mesStats(){
+    document.getElementById("joueur"); 
+  }
