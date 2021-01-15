@@ -14,45 +14,41 @@
     <h2>A peine l'entrée passé une forme commence à se distinguer devant vous: </h2>
     <img src="img/Marchant.jpeg" alt="Marchant" width="300" height="400">
     <h1>Besoin de quelque chose l'ami???</h1>
-    <button type="button" onclick="<p id=joueu></p>">Voir mes stats</button>
+    <input type="button" onclick="stats()" id="statsBtn" value="Mes stats">
     <input type="submit" value="Demander une arme">
     <input type="submit" value="Partir à l'aventure">
     <button type="button" onclick="document.write('C est pas un rigolo ce vendeur,VOUS ETES MORT!')">Tenter de
         depouiller le marchant</button>
 
-
-
-
-
-
-
-
+        <p id="joueur"></p>
 
 
     <script>
         class joueur {
-            constructor(name, year) {
-                this.name = name;
-                this.year = year;
+            constructor(id, pv, xp, force, endurance, arme, or) {
+            this.id = id;
+            this.pv = pv;
+            this.xp = xp;
+            this.force = force;
+            this.endurance = endurance;
+            this.arme = arme;
+            this.or = or;
+            }
+
+            getStats() {
+                return "PV: "+ this.pv + " XP: " + this.xp + " " + "Force: "+ this.force + "Endurance: "+ this.endurance + "Arme: Epée de légende "+ "Or: "+ this.or
             }
         }
 
+        joueur1 = new joueur(1, 10, 0, 1, 1, 1, 20);
+      
 
-        var joueur = {
-    pv: 10,
-    xp: 0,
-    force: 1,
-    endurance: 1,
-    arme: "Epée +1" ,//get dans arme
-    rubies: 20, 
-    id: 1
-  };
+        function stats() {
+            //var x = document.getlementById("statsBtn").value;
+            console.log("Ciao", joueur1)
+            document.getElementById("joueur").innerHTML = joueur1.getStats();
+        }
 
-
-
-        myCar = new Car("Ford", 2014);
-        document.getElementById("demo").innerHTML =
-            myCar.name + " " + myCar.year;
     </script>
 
 

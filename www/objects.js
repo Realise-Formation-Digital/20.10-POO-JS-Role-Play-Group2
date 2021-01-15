@@ -1,26 +1,31 @@
-var joueur = {
-    pv: 10,
-    xp: 0,
-    force: 1,
-    endurance: 1,
-    arme: "Epée +1" ,//get dans arme
-    rubies: 20, 
-    id: 1
-  };
 
-  var PNJ = {
-    pv: 10,
-    xp: 0,
-    force: 1,
-    endurance: 1,
-    arme: "Epée +1" ,//get dans arme
-    rubies: 20
-  };
+  class joueur {
+    constructor(id, pv, xp, force, endurance, arme, or) {
+    this.id = id;
+    this.pv = pv;
+    this.xp = xp;
+    this.force = force;
+    this.endurance = endurance;
+    this.arme = arme;
+    this.pr = or;
+    }
+}
 
-  
+joueur1 = new joueur(1, 10, 0, 1, 1, 1, 20);
 
+class pnj {
+  constructor(id, pv, xp, force, endurance, arme, or) {
+  this.id = id;
+  this.pv = pv;
+  this.xp = xp;
+  this.force = force;
+  this.endurance = endurance;
+  this.arme = arme;
+  this.pr = or;
+  }
+}
 
-
+pnj1 = new pnj();
 
 
 
