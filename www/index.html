@@ -4,18 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RPG GAME</title>
+    <title>L'enfer de Dante: Une spirale infernale</title>
+    <link rel="icon" type="image/x-icon" href="img/bandersnatch.jpg">
 
 </head>
 
 <body>
-    <h1>Lasciate ogne speranza, voi ch'intrate</h1>
+    <h1>L'enfer de Dante: Une spirale infernale</h1>
+    <h2>Vous arrivez devant un portaille lugubre on est inscrit: Lasciate ogne speranza, voi ch'intrate</h2>
     <img src="img/gate.png" alt="Gate" width="300" height="400">
-    <h2>A peine l'entrée passé une forme commence à se distinguer devant vous: </h2>
+    <h2>A peine l'entrée passé une forme commence à se distinguer devant vous qui en ricannant vous demande: </h2>
     <img src="img/Marchant.jpeg" alt="Marchant" width="300" height="400">
     <h1>Besoin de quelque chose l'ami???</h1>
-    <input type="button" onclick="stats()" id="statsBtn" value="Mes stats">
-    <input type="submit" value="Acheter/Vendre une arme">
+    <h2>Qu'aller vous faire?</h2>
+    <input type="button" onclick="stats()" id="statsBtn" value="Consulter vos stats">
+    <button onclick="document.location='inventaire.html'">Inventaire</button>
     <button onclick="document.location='niveau1.html'">Partir à l'aventure</button>
     <button type="button" onclick="document.write('C est pas un rigolo ce vendeur,VOUS ETES MORT!')">Tenter de
         depouiller le marchant</button>
@@ -23,40 +26,7 @@
         <p id="joueur"></p>
 
 
-    <script>
-        class joueur {
-            constructor(id, pv, xp, force, endurance, arme, or) {
-            this.id = id;
-            this.pv = pv;
-            this.xp = xp;
-            this.force = force;
-            this.endurance = endurance;
-            this.arme = arme;
-            this.or = or;
-            }
-
-            getStats() {
-                return "PV: "+ this.pv + " " + " XP: " + this.xp + " " + "Force: "+ this.force + " " + "Endurance: "+ this.endurance + " " + "Arme: Epée de légende "+ " " + "Or: "+ this.or
-            }
-        }
-
-        joueur1 = new joueur(1, 10, 0, 1, 1, 1, 20);
-      
-
-        function stats() {
-           
-            //console.log("Ciao", joueur1)
-            document.getElementById("joueur").innerHTML = joueur1.getStats();
-        }
-
-    </script>
-
-
-
-
-
-
-
+<script src="main.js"></script>
 </body>
 
 </html>
