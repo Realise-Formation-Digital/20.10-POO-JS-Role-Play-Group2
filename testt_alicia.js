@@ -32,7 +32,7 @@
         } 
 
 
-       //methods
+       //methods = functions
 
         fight() {
             // function combattre
@@ -74,17 +74,16 @@
         constructor (name, weapon) {       // paramètres: nom du monstre et nom de l'arme  
 
             const xp = Math.floor(Math.random() * (50)) + 1     // point d'expérience aléatoire de 1 à 50
-            const str = Math.floor(Math.random() * (xp)) + 1    // force aléatoire de 1 à nom de oint d'expérience
-            const end = Math.floor(Math.random() * (xp)) + 1    // force aléatoire de 1 à nom de oint d'expérience
+            const str = Math.floor(Math.random() * (xp)) + 1    // force aléatoire de 1 à nom de point d'expérience
+            const end = Math.floor(Math.random() * (xp)) + 1    // force aléatoire de 1 à nom de point d'expérience
 
             var weapons = []         // weapons est nul si le monstre n'a pas d'arme)
-            if (weapon != null) {    // si le monstre a pas une arme, les propriétés force et endurance de l'arme sont aléatoires de 1 à endurance du monstre5 
+            if (weapon != null) {    // si le monstre a pas une arme, les propriétés force et endurance de l'arme sont aléatoires de 1 à endurance du monstre
                 weapon._str = Math.floor(Math.random() * (xp)) + 1;
                 weapon._end = Math.floor(Math.random() * (xp)) + 1;
-                weapons.push(weapon)
+                weapons.push(weapon)     // add new elements to the array 
             }
             
-
             const gold = Math.floor(Math.random() * (51))    // sous aléatoire de 0 à 50
 
             super(name, 1, xp, str, end, weapons, gold);      // créer le monstre en utilisant le constructor de la clase Participant
@@ -118,7 +117,6 @@
 
      //instance de la class joueur
      var joueur = new Joueur('Joueur1');
-
 
      //instance de la class nonstre avec 2 paramètres: name du monstre et array arme (name, prix) OU name et array null si le monstre n'a pas d'arme
      var monstre = new Monstre("Monstre1", new Weapon("Espada", 30));
