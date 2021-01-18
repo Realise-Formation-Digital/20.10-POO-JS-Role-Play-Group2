@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   maria_db:
-    container_name: gentil
+    container_name: opprpg2
     image: mariadb:latest # version de l'image mysql
     volumes:
       - ./data_db:/var/lib/mariadb # où seront stockée les données en local
@@ -25,7 +25,7 @@ services:
       - '9000:80' # le port pour accéder à phpMyAdmin -> localhost:9000
   # `webserver` service provides Apache + PHP
   webserver:
-    container_name : combat
+    container_name : opprpg
     # Use custom image based on php-apache official image
     image: php:7.2-apache-stretch
     # Run the services as the same user as the host's one, or as user with uid 1000

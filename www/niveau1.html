@@ -8,16 +8,18 @@
 
 </head>
 <body>
-    <h2>Le cry des corbeaux s'étouffe à fur et à mesure que vous avancer dans la grotte, quand soudain</h2>
+    <h2>Les cris des corbeaux s'étouffe à fur et à mesure que vous avancer dans la grotte, quand soudain</h2>
     <h1>UN MONSTRE!!!</h1>
     <img src="img/lvl1monster.png" alt="Level 1 monster" width="400" height="400">
     <h1>Qu'allez vous faire???</h1>
     <input type="button" onclick="stats()" id="statsBtn" value="Consulter vos stats">
+    <input type="button" onclick="statsMonstre()" id="statsBtn" value="Consulter stats du monste">
     <button onclick="document.location='inventaire.html'">Inventaire</button>
-    <input type="submit" value="Attaquer!">
+    <input type="button" onclick="attaque()" id="statsBtn" value="Attaquer!">
     <button type="button" onclick="document.write('Fuire devant votre premier monstre... Dans votre panique vous trébucher et vous briser la nuque, VOUS ETES MORT!')">Fuir</button>
 
     <p id="joueur"></p>
+    <p id="monstre"></p>
 
 
 <script src="main.js"></script>
