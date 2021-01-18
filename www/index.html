@@ -1,31 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'enfer de Dante: Une spirale infernale</title>
-    <link rel="icon" type="image/x-icon" href="img/bandersnatch.jpg">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="styles.css" rel="stylesheet">
+  <script defer src="game.js"></script>
+  <title>Text Adventure</title>
 </head>
-
 <body>
-    <h1>L'enfer de Dante: Une spirale infernale</h1>
-    <h2>Vous arrivez devant un portaille lugubre on est inscrit: Lasciate ogne speranza, voi ch'intrate</h2>
-    <img src="img/gate.png" alt="Gate" width="300" height="400">
-    <h2>A peine l'entrée passé une forme commence à se distinguer devant vous qui en ricannant vous demande: </h2>
-    <img src="img/Marchant.jpeg" alt="Marchant" width="300" height="400">
-    <h1>Besoin de quelque chose l'ami???</h1>
-    <h2>Qu'aller vous faire?</h2>
-    <input type="button" onclick="stats()" id="statsBtn" value="Consulter vos stats">
-    <button onclick="document.location='inventaire.html'">Acheter/Vendre</button>
-    <button onclick="document.location='niveau1.html'">Partir à l'aventure</button>
-    <button onclick="document.location='mort.html'">Tenter de depouiller le marchant</button>
-
-    <p id="joueur"></p>
-
-
-<script src="main.js"></script>
+  <div class="container">
+    <!--div id="image" class= "images">Image</div-->
+    <div id="text">Text</div>
+    <div id="option-buttons" class="btn-grid">
+      <button class="btn">Option 1</button>
+      <button class="btn">Option 2</button>
+      <button class="btn">Option 3</button>
+      <button class="btn">Option 4</button>
+    </div>
+  </div>
 </body>
-
 </html>
