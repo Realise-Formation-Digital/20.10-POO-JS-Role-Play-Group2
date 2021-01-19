@@ -2,33 +2,15 @@
 
 const textElement = document.getElementById('text')
 const optionButtonsElement = document.getElementById('option-buttons')
-const imageElement = document.getElementById('image')
-//console.log("Ciao", textElement, optionButtonsElement, imageElement)
+const imageElement = document.getElementById("image")
+
+// Mettre le status de base vide
+
 let state = {}
 
 // FUNCTIONS
 
 
-
-
-
-
-function showImageNode(ImageNodeIndex) {
-  
-  const imageNode = imageNodes.find(imageNode => imageNode.id === imageNodeIndex)
-  textElement.innerImage = imageNode.text
-
-}
-
-function image(image) {
-  console.log("image")
-  var x = document.createElement("image");
-  x.setAttribute("src", image);
-  x.setAttribute("width", "304");
-  x.setAttribute("height", "228");
-  x.setAttribute("alt", "image");
-  document.body.appendChild(x);
-}
 
 function startGame() {
   state = {}
@@ -36,22 +18,63 @@ function startGame() {
   showTextNode(1)
 }
 
+function image() {
+  let image = document.createElement("image");
+  x.setAttribute("src", "image");
+  x.setAttribute("width", "304");
+  x.setAttribute("height", "228");
+  x.setAttribute("alt", "The Pulpit Rock");
+  document.body.appendChild(image);
+}
+
+/*
+function showImageNode(imageNodeIndex) {  
+  console.log("ShowImageNode")
+  const imageNode = imageNodes.find(imageNode => imageNode.id === imageNodeIndex)
+  console.log("ShowImageNode", imageNode)
+  imageElement.innerImage = imageNode.text
+  while (optionButtonsElement.firstChild) {
+    optionButtonsElement.removeChild(optionButtonsElement.firstChild)
+  }
+}
+*/
+
+function image() {
+  var x = document.createElement("image");
+  x.setAttribute("src", "image");
+  x.setAttribute("width", "304");
+  x.setAttribute("height", "228");
+  x.setAttribute("alt", "The Pulpit Rock");
+  document.body.appendChild(x);
+}
 
 function showTextNode(textNodeIndex) {
-  
   const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
   textElement.innerText = textNode.text
   while (optionButtonsElement.firstChild) {
     optionButtonsElement.removeChild(optionButtonsElement.firstChild)
   }
+  
 
   textNode.options.forEach(option => {
+
+console.log("Option", option)
+console.log("Option", showOption(option))
+
     if (showOption(option)) {
+      console.log("1")
       const button = document.createElement('button')
+      console.log("2")
       button.innerText = option.text
+      console.log("3")
+
       button.classList.add('btn')
+      console.log("4")
       button.addEventListener('click', () => selectOption(option))
+      console.log("5")
       optionButtonsElement.appendChild(button)
+    }else{
+      console.log("NO!")
     }
   })
 }
@@ -59,7 +82,7 @@ function showTextNode(textNodeIndex) {
 
 
 function showOption(option) {
-  console.log("showOption")
+  console.log("showOption", option)
   return option.requiredState == null || option.requiredState(state)
 }
 
@@ -69,8 +92,11 @@ function selectOption(option) {
   if (nextTextNodeId <= 0) {
     return startGame()
   }
+  console.log("est-ce que on arrive ici?")
   state = Object.assign(state, option.setState)
   showTextNode(nextTextNodeId)
+  console.log("est-ce que on arrive ici? 2")
+  showImageNode(nextImageNodeId)
 }
 
 // Nodes
@@ -89,7 +115,7 @@ const textNodes = [
   },
   {
     id: 2,
-    image: "img/Marchant.jpeg",
+    image: "img/marchant.jpg",
     text: 'A peine l entrée passé une forme commence à se distinguer devant vous qui en ricannant vous demande: Besoin de quelques chose l ami?',
     options: [
       

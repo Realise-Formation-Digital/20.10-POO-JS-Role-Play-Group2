@@ -3,6 +3,11 @@
   font-family: Gotham Rounded;
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: Gotham Rounded;
+}
+
 body {
   padding: 100;
   margin: 100;
@@ -15,8 +20,6 @@ body {
   
 }
 
-
-
 .container {
   width: 800px;
   max-width: 80%;
@@ -24,6 +27,11 @@ body {
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 0 10px 2px;
+}
+
+.image{
+  width: 400px;
+  
 }
 
 .btn-grid {
@@ -46,11 +54,8 @@ body {
   border-color: black;
 }
 
-/* Create three equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 33.33%;
-}
+
+
 
 /* Clear floats after the columns */
 .row:after {
