@@ -8,12 +8,33 @@ let state = {}
 
 // FUNCTIONS
 
+
+
+
+
+
+function showImageNode(ImageNodeIndex) {
+  
+  const imageNode = imageNodes.find(imageNode => imageNode.id === imageNodeIndex)
+  textElement.innerImage = imageNode.text
+
+}
+
+function image(image) {
+  console.log("image")
+  var x = document.createElement("image");
+  x.setAttribute("src", image);
+  x.setAttribute("width", "304");
+  x.setAttribute("height", "228");
+  x.setAttribute("alt", "image");
+  document.body.appendChild(x);
+}
+
 function startGame() {
   state = {}
   console.log("startGame")
   showTextNode(1)
 }
-
 
 
 function showTextNode(textNodeIndex) {
@@ -35,15 +56,7 @@ function showTextNode(textNodeIndex) {
   })
 }
 
-function image(imagesrc) {
-  console.log("Image")
-  var x = document.createElement("img");
-  x.setAttribute("src", imagesrc);
-  x.setAttribute("width", "304");
-  x.setAttribute("height", "228");
-  x.setAttribute("alt", "image");
-  document.body.appendChild(x);
-}
+
 
 function showOption(option) {
   console.log("showOption")
@@ -60,19 +73,16 @@ function selectOption(option) {
   showTextNode(nextTextNodeId)
 }
 
+// Nodes
+
 const textNodes = [
   {
     id: 1,
     image: "img/gate.png",
-    text: 'You wake up in a strange place and you see a jar of blue goo near you.',
+    text: 'Vous arrivez devant un portaille lugubre on est inscrit: Lasciate ogne speranza, voi ch intrate',
     options: [
       {
-        text: 'Take the goo',
-        setState: { blueGoo: true },
-        nextText: 2
-      },
-      {
-        text: 'Leave the goo',
+        text: 'Passer le portaille',
         nextText: 2
       }
     ]
@@ -80,47 +90,51 @@ const textNodes = [
   {
     id: 2,
     image: "img/Marchant.jpeg",
-    text: 'You venture forth in search of answers to where you are when you come across a merchant.',
+    text: 'A peine l entrée passé une forme commence à se distinguer devant vous qui en ricannant vous demande: Besoin de quelques chose l ami?',
     options: [
+      
       {
-        text: 'Trade the goo for a sword',
-        requiredState: (currentState) => currentState.blueGoo,
-        setState: { blueGoo: false, sword: true },
+        text: "Acheter/Vendre",
+        //onclick=stats() id=statsBtn,
+        //text: 'Prendre l épée',
+        //setState: { arme: true },
         nextText: 3
       },
       {
-        text: 'Trade the goo for a shield',
-        requiredState: (currentState) => currentState.blueGoo,
-        setState: { blueGoo: false, shield: true },
-        nextText: 3
+        text: 'Partir à l aventure',
+        nextText: 5
       },
       {
-        text: 'Ignore the merchant',
-        nextText: 3
-      }
+        text: 'Tenter de dépouiller le marchand',
+        nextText: 4
+      },
+
     ]
   },
   {
     id: 3,
-    text: 'After leaving the merchant you start to feel tired and stumble upon a small town next to a dangerous looking castle.',
+    text: 'J ai de belles choses en stoque',
     options: [
       {
-        text: 'Explore the castle',
-        nextText: 4
-      },
-      {
-        text: 'Find a room to sleep at in the town',
+        text: 'Acheter une épée',
+        setState: { blueGoo: false, sword: true },
         nextText: 5
       },
       {
-        text: 'Find some hay in a stable to sleep in',
-        nextText: 6
-      }
+        text: 'Acheter un bouclier',
+        setState: { blueGoo: false, shield: true },
+        nextText: 5
+      },
+      {
+        text: 'Partir à l aventure',
+        nextText: 5
+      },
     ]
   },
+        
   {
     id: 4,
-    text: 'You are so tired that you fall asleep while exploring the castle and are killed by some terrible monster in your sleep.',
+    text: 'Pas un rigolo ce marchand, le temps de voir ses yeux devenir rouge, VOUS ETES MORT!!!.',
     options: [
       {
         text: 'Restart',
@@ -130,12 +144,26 @@ const textNodes = [
   },
   {
     id: 5,
-    text: 'Without any money to buy a room you break into the nearest inn and fall asleep. After a few hours of sleep the owner of the inn finds you and has the town guard lock you in a cell.',
+    text: 'Les cris des corbeaux s étouffe à fur et à mesure que vous avancer dans la grotte, quand soudain: UN MONSTRE!!!',
     options: [
       {
-        text: 'Restart',
-        nextText: -1
-      }
+        text: 'Attaquer',
+        nextText: 6
+      },
+      {
+        text: 'Fuire',
+        nextText: 8
+      },
+      {
+        text: 'Attaquer avec votre épée',
+        requiredState: (currentState) => currentState.sword,
+        nextText: 9
+      },
+      {
+        text: 'Se cacher derrière votre bouclier',
+        requiredState: (currentState) => currentState.shield,
+        nextText: 10
+      },
     ]
   },
   {
@@ -175,7 +203,7 @@ const textNodes = [
   },
   {
     id: 8,
-    text: 'Your attempts to run are in vain and the monster easily catches.',
+    text: 'Fuire devant votre premier monstre... Dans votre panique vous trébucher et vous briser la nuque, VOUS ETES MORT!!!',
     options: [
       {
         text: 'Restart',
