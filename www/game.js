@@ -19,15 +19,14 @@ function startGame() {
 }
 
 function image() {
-  let image = document.createElement("image");
+  var x = document.createElement("image");
   x.setAttribute("src", "image");
   x.setAttribute("width", "304");
   x.setAttribute("height", "228");
-  x.setAttribute("alt", "The Pulpit Rock");
-  document.body.appendChild(image);
+  x.setAttribute("alt", "image");
+  document.body.appendChild(x);
 }
 
-/*
 function showImageNode(imageNodeIndex) {  
   console.log("ShowImageNode")
   const imageNode = imageNodes.find(imageNode => imageNode.id === imageNodeIndex)
@@ -37,20 +36,17 @@ function showImageNode(imageNodeIndex) {
     optionButtonsElement.removeChild(optionButtonsElement.firstChild)
   }
 }
-*/
 
-function image() {
-  var x = document.createElement("image");
-  x.setAttribute("src", "image");
-  x.setAttribute("width", "304");
-  x.setAttribute("height", "228");
-  x.setAttribute("alt", "The Pulpit Rock");
-  document.body.appendChild(x);
-}
+
 
 function showTextNode(textNodeIndex) {
   const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
   textElement.innerText = textNode.text
+  const imageNode = imageNodes.find(imageNode => imageNode.id === imageNodeIndex)
+  imageElement.innerText = imageNode.text
+  while (optionButtonsElement.firstChild) {
+    optionButtonsElement.removeChild(optionButtonsElement.firstChild)
+  }
   while (optionButtonsElement.firstChild) {
     optionButtonsElement.removeChild(optionButtonsElement.firstChild)
   }
@@ -104,7 +100,7 @@ function selectOption(option) {
 const textNodes = [
   {
     id: 1,
-    image: "img/gate.png",
+    imageElement,
     text: 'Vous arrivez devant un portaille lugubre on est inscrit: Lasciate ogne speranza, voi ch intrate',
     options: [
       {
