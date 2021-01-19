@@ -8,35 +8,49 @@
         constructor (name, hp, xp, str, end, wpn, gold) {
             this._name = name;
             this._hp = hp;
-            this._xp = xp;
+            this._xp = xp;  
             this._str = str;
             this._end = end;
             this._wpn = wpn;
             this._gold = gold;
         }
         
-        gagner() {
-            if (xp == 50) {
+        win() {
+            if (xp === 50) {
                return "YOU WON";
             }
         }
         
-        fight() {
-            if (Monster.hp == 0) {
-                return
-
+        
+        die(joueur) {
+            if (joueur._hp === 0) {
+                return "YOU DIED"
             }
+        }
 
+        fight()
+
+        run(joueur) {
+            joueur._xp = xp - 1;
+            if (joueur(xp) = 0){
+                xp = 0;
+            }
+           return "In this world  cowards, will never reach their goals."
         }
 
 
+
+
     }
+
+
+    
     
     // 
     class Joueur extends Personnage {
         super (name, hp, xp, str, end, wpn, gold);
 
-        gagner();
+        win();
 
     }
 
