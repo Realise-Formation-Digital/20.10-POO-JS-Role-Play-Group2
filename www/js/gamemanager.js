@@ -6,13 +6,13 @@ let GameManager = {
     resetPlayer: function (classType) {
         switch (classType) {
             case "link":
-                player = new Player(classType, 200, 0, 200, 100, 50);
+                player = new Player(classType, 200, 50, 200, 100, 50);
                 break;
             case "merlin":
-                player = new Player(classType, 100, 0, 300, 150, 25);
+                player = new Player(classType, 100, 100, 300, 150, 25);
                 break;
             case "skaven":
-                player = new Player(classType, 50, 0, 200, 100, 50);
+                player = new Player(classType, 50, 10, 200, 100, 50);
                 break;
         }
         let getInterface = document.querySelector(".interface");
@@ -29,13 +29,13 @@ let GameManager = {
         getActions.innerHTML = '<a href="#" class="btn-prefight" onclick="GameManager.setFight()">Search for an enemy!</a>';
         getArena.style.visibility = "visible";
     },
-    setFight: function (enemyType) {
+    setFight: function () {
         let getHeader = document.querySelector(".header");
         let getActions = document.querySelector(".actions");
         let getEnemy = document.querySelector(".enemy");
         // create enemy 
-        let enemy00 = new Enemy("Goblin", 100, 0, 50, 100, 100);
-        let enemy01 = new Enemy("Troll", 150, 1, 60, 110, 110);
+        let enemy00 = new Enemy("Goblin", 1, 1, 50, 100, 100);
+        let enemy01 = new Enemy("Troll", 2, 1, 60, 110, 110);
         let chooseRandomEnemy = Math.floor(Math.random() * Math.floor(2));
         console.log(chooseRandomEnemy);
         switch (chooseRandomEnemy) {
