@@ -14,6 +14,9 @@ let GameManager = {
             case "skaven":
                 player = new Player(classType, 50, 10, 200, 100, 50);
                 break;
+            case "Elf":
+                player = new Player(classType, 50, 10, 200, 100, 50);
+                break;
         }
         let getInterface = document.querySelector(".interface");
         getInterface.innerHTML = '<img src="img/' + classType.toLowerCase() + '.png "class="img-avatar"><div><h3>' +

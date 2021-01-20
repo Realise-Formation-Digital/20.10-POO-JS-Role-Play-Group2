@@ -23,6 +23,7 @@ let PlayerMoves = {
             } else {
                 calcBaseDamage = player.strength * player.agility / 1000;
             }
+            console.log("who s first");
             let offsetDamage = Math.floor(Math.random() * Math.floor(10));
             let calcOutputDamage = calcBaseDamage + offsetDamage;
             // Number of hits
