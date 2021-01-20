@@ -15,29 +15,42 @@ buttonElement.addEventListener('click', () => {
 /**
  * Function that start the game
  */
-export function startGame() {
-  console.log("[Game][StartGame] Starting game")
+export async function startGame() {
+  try {
+    console.log("[Game][StartGame] Starting game")
 
-  // let player1 = null
-  // let player2 = null
-  // let monster1 = null
-  let monster2 = null
-  let monster1weapon = null
-  let npcWeaponFlecha = null
-  let npcWeaponMisil = null
+    // let player1 = null
+    // let player2 = null
+    // let monster1 = null
 
-  state = {}
-  showTextNode(1);
+    let playerFoundInDatabase = null
+    let monster2 = null
+    let monster1weapon = null
+    let npcWeaponFlecha = null
+    let npcWeaponMisil = null
 
-  player1 = new Player('Player1'); //instance de la class joueur
-  player1.show();
-  monster1weapon = new Weapon("Espada", 30); // instance of the weapone for the monster 1
-  monster1 = new Monster("Monstre1", monster1weapon); // new monster with weapon created
-  // monster2 = new Monster("Monstre2", null); // new monster without weapon
-  player1.fight(monster1) // play against monster 1
-  npcWeaponFlecha = new Weapon("Flecha", 10) // new weapon for npc
-  npcWeaponMisil = new Weapon("Misil", 50) // new weapon for npc
-  const npc = new NPC([npcWeaponFlecha, npcWeaponMisil]); // new instance of npc with two weapon already declared
+    // get player from server
+    playerFoundInDatabase = await getDataPlayer(1)
+    if (!playerFoundInDatabase) await createPlayer('Player1')
+
+    //todo create new instance of player with the data found in the database
+
+    state = {}
+    showTextNode(1);
+
+    player1 = new Player(); //instance de la class joueur
+    player1.show();
+    monster1weapon = new Weapon("Espada", 30); // instance of the weapone for the monster 1
+    monster1 = new Monster("Monstre1", monster1weapon); // new monster with weapon created
+    // monster2 = new Monster("Monstre2", null); // new monster without weapon
+    player1.fight(monster1) // play against monster 1
+    npcWeaponFlecha = new Weapon("Flecha", 10) // new weapon for npc
+    npcWeaponMisil = new Weapon("Misil", 50) // new weapon for npc
+    const npc = new NPC([npcWeaponFlecha, npcWeaponMisil]); // new instance of npc with two weapon already declared
+
+  }catch (e) {
+    console.error(e)
+  }
 
 }
 
@@ -210,5 +223,36 @@ const textNodes = [
     ]
   },
 ]
+
+async function createPlayer (name) {
+  try{
+    console.log("[Game][createPlayer] Creating player on server with params", name)
+    player1 = new Player(name)
+    const result = await window.fetch('/player')
+  }catch (e) {
+    console.error("[Game][createPlayer] An error occured when creating player on server", e)
+  }
+}
+
+async function getDataPlayer (id) {
+  try{
+    console.log("[Game][getDataPlayer] Getting data from server with params", id)
+    let playerFoundInTheDatabase = null
+    playerFoundInTheDatabase = await window.fetch('/player?id=' + id.toString()).toJSON()
+    return playerFoundInTheDatabase
+  }catch (e) {
+    console.error("[Game][getDate] An error occurred", e)
+  }
+}
+
+async function saveData () {
+  try {
+    console.log("[Game][saveData] Saving data on server with params")
+
+  }catch (e) {
+    console.error("[Game][saveData] An error occurred when saving data on server", e)
+  }
+}
+
 
 startGame();
