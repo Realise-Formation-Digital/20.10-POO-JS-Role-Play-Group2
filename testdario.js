@@ -28,7 +28,10 @@
             }
         }
 
-        fight()
+        fight() {
+
+            
+        }
 
         run(joueur) {
             joueur._xp = xp - 1;
