@@ -49,7 +49,7 @@ const purchaseObserver = {
        // alert("This store doesn't sell those."); 
     },
     successfullyPurchased: function(item) { 
-        equipment.push(item); 
+        equipment.push(item);
         //alert("Congratulations! You are now the proud owner of a " + item.name + "."); 
     } 
 }

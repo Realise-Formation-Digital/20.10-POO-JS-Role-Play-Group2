@@ -7,6 +7,11 @@ let state = {}
 let player1 = null
 let monster1 = null
 
+const buttonElement = document.getElementById('test')
+buttonElement.addEventListener('click', () => {
+  player1.fight(monster1);
+  console.log(player1)
+})
 /**
  * Function that start the game
  */
