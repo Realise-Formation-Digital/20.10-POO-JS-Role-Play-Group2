@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test RPG</title>
+    <link href="http://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+    <link rel="stylesheet" href="test.css">
+    <script src="js/gamemanager.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/enemy.js"></script>
+</head>
+<body>
+    <div class="header">
+        <p>Welcome to the Arena</p>
+        <h2>Choose youe your character:</h2>
+    </div>
+
+    <div class="interface">
+        <a href="#" onclick="GameManager.setGameStart('link')">
+            <img src="img/link.png" alt="link">
+            <div>
+                <h3>Link the Legendary Hero</h3>
+                <p>A powerful warrior, with balanced stats</p>
+            </div>
+        </a>
+        <a href="#" onclick="GameManager.setGameStart('merlin')">
+            <img src="img/merlin.png" alt="merlin">
+            <div>
+                <h3>Merlin the all mighty</h3>
+                <p>Low stats but powerful spells</p>
+            </div>
+        </a>
+        <a href="#" onclick="GameManager.setGameStart('skaven')">
+            <img src="img/skaven.png" alt="skaven">
+            <div>
+                <h3>Lord Squeek</h3>
+                <p>For advanced players only, YES YES!</p>
+            </div>
+        </a>
+    </div>
+
+    <div class="actions">
+
+
+    </div>
+
+    ><div class="arena">
+
+
+    </div>
+
+    <div class="enemy">
+
+
+    </div>
+</body>
+
+</html>

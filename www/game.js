@@ -2,7 +2,7 @@
 
 const textElement = document.getElementById('text')
 const optionButtonsElement = document.getElementById('option-buttons')
-const imageElement = document.getElementById("image")
+const imageElement = document.getElementById('image')
 
 // Mettre le status de base vide
 
@@ -15,6 +15,7 @@ let state = {}
 function startGame() {
   state = {}
   console.log("startGame")
+  image()
   showTextNode(1)
 }
 
@@ -23,30 +24,34 @@ function image() {
   x.setAttribute("src", "image");
   x.setAttribute("width", "304");
   x.setAttribute("height", "228");
-  x.setAttribute("alt", "image");
+  x.setAttribute("alt", "The Pulpit Rock");
   document.body.appendChild(x);
 }
 
+
 function showImageNode(imageNodeIndex) {  
   console.log("ShowImageNode")
-  const imageNode = imageNodes.find(imageNode => imageNode.id === imageNodeIndex)
+  const imageNode = textNodes.find(textNode => textNode.id === textNodeIndex)
   console.log("ShowImageNode", imageNode)
   imageElement.innerImage = imageNode.text
-  while (optionButtonsElement.firstChild) {
-    optionButtonsElement.removeChild(optionButtonsElement.firstChild)
+  while (imageElement.firstChild) {
+    optionButtonsElement.removeChild(imageElement.firstChild)
   }
 }
 
 
+function image() {
+  var x = document.createElement("image");
+  x.setAttribute("src", "image");
+  x.setAttribute("width", "304");
+  x.setAttribute("height", "228");
+  x.setAttribute("alt", "The Pulpit Rock");
+  document.body.appendChild(x);
+}
 
 function showTextNode(textNodeIndex) {
   const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
   textElement.innerText = textNode.text
-  const imageNode = imageNodes.find(imageNode => imageNode.id === imageNodeIndex)
-  imageElement.innerText = imageNode.text
-  while (optionButtonsElement.firstChild) {
-    optionButtonsElement.removeChild(optionButtonsElement.firstChild)
-  }
   while (optionButtonsElement.firstChild) {
     optionButtonsElement.removeChild(optionButtonsElement.firstChild)
   }
@@ -100,7 +105,7 @@ function selectOption(option) {
 const textNodes = [
   {
     id: 1,
-    imageElement,
+    image: "img/gate.png",
     text: 'Vous arrivez devant un portaille lugubre on est inscrit: Lasciate ogne speranza, voi ch intrate',
     options: [
       {
