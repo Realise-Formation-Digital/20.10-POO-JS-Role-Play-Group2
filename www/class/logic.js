@@ -2,11 +2,11 @@ import Player from './player.js'
 
 export default class Game {
   
-    #player;
+    #player = null;
     
     async getPlayer (id) {
         const data = {
-            new_player: 'newPlayer',
+            existing_player: 'player',
             id: id
         }
 
@@ -14,8 +14,7 @@ export default class Game {
         let playerFoundInTheDatabase = null
         //playerFoundInTheDatabase = await window.fetch('/player?id=' + id.toString()).toJSON()
         try {
-        
-            playerFoundInTheDatabase = fetch("database.php", {
+            playerFoundInTheDatabase = await fetch("database.php", {
                 method: "POST",
                 body: JSON.stringify(data),
                 mode: "same-origin",
@@ -23,14 +22,15 @@ export default class Game {
                 headers: {
                   "Content-Type": "application/json"
                 }
-            }).then(function(response) {
-                console.log("Reponse serveur", response);
             })
+            console.log(playerFoundInTheDatabase)
+            return playerFoundInTheDatabase;
+            // }).then(function(response) {
+            //     console.log("Reponse serveur", response);
+            // })
         } catch (e) {
             console.error("[Game][getDate] An error occurred", e)
         }
-        
-        return playerFoundInTheDatabase;
         
     }
 
@@ -38,9 +38,10 @@ export default class Game {
     createPlayer(name) {
         try {
             console.log("[Game][createPlayer] Creating player on server with params", name)
-            this.#player = new Player(name);
+            let player1 = new Player(name);
+            //console.log(player1)
         } catch (e) {
-            console.error("[Game][createPlayer] An error occured when creating player on server", e)
+            console.error("[Game][createPlayer] An error occured when creating player", e)
         }
     }
   

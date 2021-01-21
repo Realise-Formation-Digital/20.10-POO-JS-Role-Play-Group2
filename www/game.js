@@ -1,8 +1,7 @@
 import Weapon from './class/weapon.js'
-import Player from './class/player.js'
 import Monster from './class/monster.js'
 import NPC from './class/npc.js'
-import Game from './class/game.js'
+import Game from './class/logic.js'
 
 let state = {}
 let game = null
@@ -32,8 +31,11 @@ export async function startGame() {
     // Create a game
     game = new Game()
     // get player from server
-    player1 = game.getPlayer(1)//await getDataPlayer(1)
+    let response = game.getPlayer(1)//await getDataPlayer(1)
+    console.log(response)
+    //json = JSON.parse(response.responseText)
     if (!player1) {
+      console.log("pepe");
       player1 = await createPlayer('Player1')
     }
 

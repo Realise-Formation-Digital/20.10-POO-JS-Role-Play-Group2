@@ -4,8 +4,9 @@ import {startGame} from '../game.js'
 
 // créer un joueur avec 10 points de vie, 0 points d'expérience, 1 point de force, une arme (qui est un créé avec la function Weapon et 2o piéces d'argent)
 class Player extends Participant {
-
   constructor(name) {
+
+    console.log("dos pepes")
     const initialWeapon = new Weapon(1,"Epee", 0, 1, 1);
     super(1, name, 10, 0, 1, 1, [initialWeapon], 20)      // créer le joueur en utilisant le constructor de la clase Participant
   }
@@ -88,10 +89,6 @@ class Player extends Participant {
   // function mourir
   dead() {
     return this._hp === 0
-  }
-
-  fight(monster) {
-    // todo
   }
 
   buyWeapon(weapon) {

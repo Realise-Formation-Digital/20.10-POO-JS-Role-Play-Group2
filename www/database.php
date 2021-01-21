@@ -28,13 +28,13 @@
     if(is_array($decoded)) {
       // Sauvegarde l'application.
       try {
-        if (isset($decoded["new_player"])) {
-          print("SAVE PLAYER");
-          echo $db->save($decoded);
+        if (isset($decoded["existing_player"])) {
+          print("Get PLAYER");
+          echo $db->get($decoded["id"]);
         }
         else {
-          print("GET PLAYER");
-          echo $db->get($decoded["id"]);
+          print("Save PLAYER");
+          echo $db->save($decoded);
         }
       } catch(PDOException $Exception) {
         echo "Une erreur est survenue lors de la sauvegarde";
@@ -57,7 +57,7 @@
       $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    // Prend les jouer dans la base de données.
+    // Chercher le jouer dans la base de données.
     public function get($id) {
       echo $id;
       try {
@@ -90,49 +90,52 @@
         $player_id = $this->pdo->lastInsertId();
 
 
-        // Insérer les armes du joueur.
-        $active_weapon_id = null;
-        $weapon_ids = [];
-        
-    //     foreach($playerObj->inventory as $weapon) {
-    //       $weaponObj = (object) $weapon;
-    //       $this->pdo->prepare("INSERT INTO arme (str, end, prix)
-    //                            VALUES ($weaponObj->str, $weaponObj->end, $weaponObj->price)")
-    //                  ->execute();
-    //       $weapon_id = $this->pdo->lastInsertId();
-
-    //       // Vérifie s'il s'agit de l'arme équipée.
-    //       if ($player->weapon['str'] == $weaponObj->str &&
-    // //          $player->weapon['name'] == $weaponObj->name &&
-    //           $player->weapon['end'] == $weaponObj->end &&
-    //           $player->weapon['prix'] == $weaponObj->price) {
-    //             $active_weapon_id = $weapon_id;
-    //           }
-
-    //       $weapon_ids[] = $weapon_id;
-    //   }
-
-        // Insérer le lien entre les armes et le joueur.
-     //   foreach($weapon_ids as $weapon_id) {
-    //      $is_active_weapon = $active_weapon_id == $weapon_id ? 1 : 0;
-           //  , equiped)
-         //  VALUES ($player_id, $weapon_id, $is_active_weapon)")
-    //      $this->pdo->prepare("INSERT INTO joueur_arme (joueur_idjoueur, arme_idarme)
-    //                          VALUES ($player_id, $weapon_id)")
-     //                ->execute();
-        }
 
        return 'Données sauvegardées';
+      //  Insérer les armes du joueur.
+       $active_weapon_id = null;
+       $weapon_ids = [];
+        
+        foreach($playerObj->inventory as $weapon) {
+          $weaponObj = (object) $weapon;
+          $this->pdo->prepare("INSERT INTO arme (str, end, prix)
+                               VALUES ($weaponObj->str, $weaponObj->end, $weaponObj->price)")
+                     ->execute();
+          $weapon_id = $this->pdo->lastInsertId();
+
+          // Vérifie s'il s'agit de l'arme équipée.
+          if ($player->weapon['str'] == $weaponObj->str &&
+              $player->weapon['name'] == $weaponObj->name &&
+              $player->weapon['end'] == $weaponObj->end &&
+              $player->weapon['prix'] == $weaponObj->price) {
+                $active_weapon_id = $weapon_id;
+              }
+
+          $weapon_ids[] = $weapon_id;
+        }
+
+       // Insérer le lien entre les armes et le joueur.
+       foreach($weapon_ids as $weapon_id) {
+         $is_active_weapon = $active_weapon_id == $weapon_id ? 1 : 0;
+           // , equiped)
+         // VALUES ($player_id, $weapon_id, $is_active_weapon)")
+         $this->pdo->prepare("INSERT INTO joueur_arme (joueur_idjoueur, arme_idarme)
+                             VALUES ($player_id, $weapon_id)")
+                    ->execute();
+        }  
+        
       } catch(PDOException $Exception) {
         print($Exception);
         throw $Exception;
       }
     }
 
-    // Charge les données depuis la base de données.
-    public function load() {
 
-    }
 
   }
 
+
+    // // // Charger les données depuis la base de données.
+    // // public function load() {
+
+    // // }
