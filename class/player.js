@@ -6,8 +6,8 @@ import { startGame } from '../game.js'
 class Player extends Participant {
 
   constructor(name) {
-    const initialWeapon = new Weapon("Short Sword", 0, 1, 1);
-    super(name, 10, 0, 1, 1, 20, [initialWeapon])      // créer le joueur en utilisant le constructor de la clase Participant
+    const initialWeapon = new Weapon("Short Sword", 10, 1, 1);
+    super(name, 10, 0, 1+ initialWeapon._str, 1+ initialWeapon._end, 20, [initialWeapon])      // créer le joueur en utilisant le constructor de la clase Participant
   }
 
 
@@ -37,8 +37,8 @@ class Player extends Participant {
         this.unequipWeapon();
       })
     }
-    let equipBtns = document.getElementsByClassName("equip");
 
+    let equipBtns = document.getElementsByClassName("equip");
     for (let i = 0; i < equipBtns.length; i++) {
       if (equipBtns[i]) {
         equipBtns[i].addEventListener('click', () => {

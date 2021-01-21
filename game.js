@@ -6,16 +6,17 @@ import NPC from './class/npc.js'
 let state = {}
 let player1 = null
 let monster1 = null
+let npc = null
+let npcWeaponFlecha = new Weapon("Flecha", 10) // new weapon for npc
+let npcWeaponMisil = new Weapon("Misil", 50) // new weapon for npc
 
-
-
-
+let monster1weapon = new Weapon("Espada", 30); // instance of the weapone for the monster 1
+monster1 = new Monster("Monstre1", monster1weapon); // new monster with weapon created
 
 const buttonElement = document.getElementById('test')
 buttonElement.addEventListener('click', () => {
-  const wpnTest3 = new Weapon("Rapire", 0, 20, 5);
-  console.log(player1._wpns[0]._str);
-  player1._inventory.push(wpnTest3)
+
+  player1.fight(monster1)
   player1.show();
 })
 /**
@@ -32,8 +33,7 @@ export async function startGame() {
     let playerFoundInDatabase = null
     let monster2 = null
     let monster1weapon = null
-    let npcWeaponFlecha = null
-    let npcWeaponMisil = null
+
 
     // get player from server
     playerFoundInDatabase = await getDataPlayer(1)
@@ -44,20 +44,17 @@ export async function startGame() {
     state = {}
     showTextNode(1);
 
+    
     player1 = new Player(); //instance de la class joueur
     player1.show();
-    monster1weapon = new Weapon("Espada", 30); // instance of the weapone for the monster 1
-    monster1 = new Monster("Monstre1", monster1weapon); // new monster with weapon created
+    npc = new NPC([npcWeaponFlecha, npcWeaponMisil], player1); // new instance of npc with two weapon already declared 
     // monster2 = new Monster("Monstre2", null); // new monster without weapon
-    npcWeaponFlecha = new Weapon("Flecha", 10) // new weapon for npc
-    npcWeaponMisil = new Weapon("Misil", 50) // new weapon for npc
-    const npc = new NPC([npcWeaponFlecha, npcWeaponMisil]); // new instance of npc with two weapon already declared
 
   }catch (e) {
     console.error(e)
   }
-
 }
+
 
 /**
  * Show the right envriroment
@@ -107,12 +104,30 @@ function showOption(option) {
  * @param option
  */
 function selectOption(option) {
-  console.log("[Game][selectOption] Show select option with params", option)
+  // console.log("[Game][selectOption] Show select option with params", option)
   const nextTextNodeId = option.nextText
   //if (nextTextNodeId <= 0) {
   //   return startGame() }
 
   switch (nextTextNodeId) {
+    case 1: {
+      document.getElementById("list").innerHTML = "";
+      break
+    }
+    case 2: {
+      npc.showBuy();
+      break
+    }
+
+    case 3: {
+      npc.showSell(player1);
+      break
+    }
+
+    case 4 : {
+      document.getElementById("list").innerHTML = "";
+      break
+    }
     case 5: {
       player1._gold -= 20;
       player1.show();
@@ -160,10 +175,6 @@ const textNodes = [
     text: "What're ya buyin?",
     options: [
       {
-        text: 'Buy',
-        nextText: 5
-      },
-      {
         text: 'Back',
         nextText: 1
       },
@@ -178,10 +189,7 @@ const textNodes = [
     id: 3,
     text: "What're ya sellin'?",
     options: [
-      {
-        text: 'Sell',
-        nextText: 6
-      },
+
       {
         text: 'Back',
         nextText: 1
