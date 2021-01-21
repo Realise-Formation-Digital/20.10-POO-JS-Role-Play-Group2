@@ -1,4 +1,4 @@
-import Participant from './partecipant.js'
+import Participant from './participant.js'
 
 class Monster extends Participant {
        
