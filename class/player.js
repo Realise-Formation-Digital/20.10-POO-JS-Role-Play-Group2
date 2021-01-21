@@ -1,6 +1,6 @@
 import Participant from './participant.js'
 import Weapon from './weapon.js'
-import {startGame} from '../game.js'
+import { startGame } from '../game.js'
 
 // créer un joueur avec 10 points de vie, 0 points d'expérience, 1 point de force, une arme (qui est un créé avec la function Weapon et 2o piéces d'argent)
 class Player extends Participant {
@@ -10,36 +10,42 @@ class Player extends Participant {
     super(name, 10, 0, 1, 1, 20, [initialWeapon])      // créer le joueur en utilisant le constructor de la clase Participant
   }
 
-  test(){
-    console.log("124142412412124142412")
-  }
 
   //methods
 
   show() {
+    // create variables strings with weapon parameters
+    let wpn = "<br>Weapon: ";
+    if (typeof this._wpns != "undefined" && this._wpns != null && this._wpns.length != null && this._wpns.length > 0) {
+      wpn += this._wpns[0].name + "(STR: " + this._wpns[0]._str + " END: " + this._wpns[0]._end + " Price: " + this._wpns[0]._price + ")" + " <button id = 'unequip'>Unequip</button>"
+    } else { wpn = "" }
+
     let inv = "<hr>Inventory:";
-    if(typeof this._inventory[0] != "undefined" && this._inventory[0] != null && this._inventory.length != null && this._inventory.length > 0){
-    for(let i = 0; i < this._inventory.length; i++){
-      inv += "<br>Weapon: " + this._inventory[i].name + "(STR: " + this._inventory[i]._str + " END: " + this._inventory[i]._end + " Price: " + this._inventory[i]._price + ") <button id = 'equip'>Equip</button>";
-      let btnElement = document.getElementById('equip')
-      btnElement.addEventListener('click', () => {
-       this.equipWeapon();
-    })
-}};
+    if (typeof this._inventory[0] != "undefined" && this._inventory[0] != null && this._inventory.length != null && this._inventory.length > 0) {
+      for (let i = 0; i < this._inventory.length; i++) {
+        inv += "<br>Weapon: " + this._inventory[i].name + "(STR: " + this._inventory[i]._str + " END: " + this._inventory[i]._end + " Price: " + this._inventory[i]._price + ") <button class = 'equip'>Equip</button>";
+      }
+    };
 
-let wpn = "<br>Weapon: ";
-        if(typeof this._wpns != "undefined" && this._wpns != null && this._wpns.length != null && this._wpns.length > 0) {
-       wpn += this._wpns[0].name + "(STR: " + this._wpns[0]._str + " END: " + this._wpns[0]._end + " Price: " + this._wpns[0]._price + ")" + " <button id = 'unequip'>Unequip</button>" 
-    } else { wpn = ""}
+    //write character and weapon parameters in html
+    document.getElementById("stats").innerHTML = "Name: " + this._name + "<br>HP: " + this._hp + "<br>XP: " + this._xp + "<br>STR: " + this._str + "<br>END: " + this._end + "<br>Gold: " + this._gold + wpn + inv;
 
-    console.log("[Player][show] Showing player")
+    //add functions to buttons
+    let unequipBtn = document.getElementById('unequip')
+    if (unequipBtn) {
+      unequipBtn.addEventListener('click', () => {
+        this.unequipWeapon();
+      })
+    }
+    let equipBtns = document.getElementsByClassName("equip");
 
-    document.getElementById("stats").innerHTML = "Name: " + this._name + "<br>HP: " + this._hp + "<br>XP: " + this._xp  + "<br>STR: " + this._str + "<br>END: " + this._end + "<br>Gold: " + this._gold +
-    wpn + inv;
-    const buttonElement = document.getElementById('unequip')
-    buttonElement.addEventListener('click', () => {
-      this.unequipWeapon();
-  })
+    for (let i = 0; i < equipBtns.length; i++) {
+      if (equipBtns[i]) {
+        equipBtns[i].addEventListener('click', () => {
+          this.equipWeapon(i);
+        })
+      }
+    }
   }
 
   /**
@@ -81,15 +87,26 @@ let wpn = "<br>Weapon: ";
     // function vendre une arme
   }
 
-  equipWeapon(weapon) {
-    // function équiper une arme
-
+  equipWeapon(i) {
+    // move weapon object from one array to another and change stats
+    if (this._wpns.length == 0) {
+      this._str += this._inventory[i]._str;
+      this._end += this._inventory[i]._end;
+      this._wpns.push(this._inventory[i]);
+      this._inventory.splice(i, 1);
+      this.show();
+    } else {
+      alert("You already have a weapon!")
+    }
   }
 
   unequipWeapon() {
-    // function déséquiper une arme
+    // move weapon object from one array to another and change stats
+    this._str -= this._wpns[0]._str;
+    this._end -= this._wpns[0]._end;
     this._inventory.push(this._wpns[0]);
-    this._wpns.splice(0,1);
+    this._wpns.splice(0, 1);
+
     this.show();
   }
 

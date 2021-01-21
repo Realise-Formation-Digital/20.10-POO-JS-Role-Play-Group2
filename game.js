@@ -14,6 +14,7 @@ let monster1 = null
 const buttonElement = document.getElementById('test')
 buttonElement.addEventListener('click', () => {
   const wpnTest3 = new Weapon("Rapire", 0, 20, 5);
+  console.log(player1._wpns[0]._str);
   player1._inventory.push(wpnTest3)
   player1.show();
 })
