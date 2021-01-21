@@ -7,10 +7,15 @@ let state = {}
 let player1 = null
 let monster1 = null
 
+
+
+
+
 const buttonElement = document.getElementById('test')
 buttonElement.addEventListener('click', () => {
-  player1.fight(monster1);
-  console.log(player1)
+  const wpnTest3 = new Weapon("Rapire", 0, 20, 5);
+  player1._inventory.push(wpnTest3)
+  player1.show();
 })
 /**
  * Function that start the game
@@ -43,7 +48,6 @@ export async function startGame() {
     monster1weapon = new Weapon("Espada", 30); // instance of the weapone for the monster 1
     monster1 = new Monster("Monstre1", monster1weapon); // new monster with weapon created
     // monster2 = new Monster("Monstre2", null); // new monster without weapon
-    player1.fight(monster1) // play against monster 1
     npcWeaponFlecha = new Weapon("Flecha", 10) // new weapon for npc
     npcWeaponMisil = new Weapon("Misil", 50) // new weapon for npc
     const npc = new NPC([npcWeaponFlecha, npcWeaponMisil]); // new instance of npc with two weapon already declared
@@ -253,6 +257,5 @@ async function saveData () {
     console.error("[Game][saveData] An error occurred when saving data on server", e)
   }
 }
-
 
 startGame();
