@@ -1,3 +1,4 @@
+import Player from './class/player.js'
 import Weapon from './class/weapon.js'
 import Monster from './class/monster.js'
 import NPC from './class/npc.js'
@@ -24,18 +25,18 @@ export async function startGame() {
     // let player2 = null
     // let monster1 = null
     let monster2 = null
+    var player1 = null
     let monster1weapon = null
     let npcWeaponFlecha = null
     let npcWeaponMisil = null
 
     // Create a game
     game = new Game()
-    // get player from server
-    let response = game.getPlayer(1)//await getDataPlayer(1)
-    console.log(response)
+    //get player from server
+    player1 = await game.getPlayer()//await getDataPlayer(1)
+    console.log(player1)
     //json = JSON.parse(response.responseText)
-    if (!player1) {
-      console.log("pepe");
+    if (player1 == null) {
       player1 = await createPlayer('Player1')
     }
 
@@ -43,16 +44,15 @@ export async function startGame() {
    
     state = {}
     showTextNode(1);
+    console.log(player1);
 
-    // player1 = new Player(); //instance de la class joueur
     // player1.show();
-    console.log(player1)
-    monster1weapon = new Weapon("Espada", 30); // instance of the weapone for the monster 1
+    monster1weapon = new Weapon(1, "Espada", 30); // instance of the weapone for the monster 1
     monster1 = new Monster("Monstre1", monster1weapon); // new monster with weapon created
     // monster2 = new Monster("Monstre2", null); // new monster without weapon
-    player1.fight(monster1) // play against monster 1
-    npcWeaponFlecha = new Weapon("Flecha", 10) // new weapon for npc
-    npcWeaponMisil = new Weapon("Misil", 50) // new weapon for npc
+    //player1.fight(monster1) // play against monster 1
+    npcWeaponFlecha = new Weapon(2, "Flecha", 10) // new weapon for npc
+    npcWeaponMisil = new Weapon(3, "Misil", 50) // new weapon for npc
     const npc = new NPC([npcWeaponFlecha, npcWeaponMisil]); // new instance of npc with two weapon already declared
 
   }catch (e) {
@@ -268,18 +268,14 @@ const textNodes = [
 
 async function createPlayer (name) {
   try{
-    console.log("[Game][createPlayer] Creating player on server with params", name)
-    player1 = await game.createPlayer(name)
+    game.createPlayer(name);
 
-    console.log("[Game][createPlayer] Saving player on server with params", name)
     await game.save()
     //const result = await window.fetch('/player')
   }catch (e) {
     console.error("[Game][createPlayer] An error occured when creating player on server", e)
   }
 }
-
-
 
 async function saveData () {
   try {

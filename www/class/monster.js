@@ -8,17 +8,16 @@ class Monster extends Participant {
         const str = Math.floor(Math.random() * (xp)) + 1    // force aléatoire de 1 à nom de oint d'expérience
         const end = Math.floor(Math.random() * (xp)) + 1    // force aléatoire de 1 à nom de oint d'expérience
 
-        var weapons = []         // weapons est nul si le monstre n'a pas d'arme)
+        // weapon est nul si le monstre n'a pas d'arme)
         if (weapon != null) {    // si le monstre a pas une arme, les propriétés force et endurance de l'arme sont aléatoires de 1 à endurance du monstre5 
             weapon._str = Math.floor(Math.random() * (xp)) + 1;
             weapon._end = Math.floor(Math.random() * (xp)) + 1;
-            weapons.push(weapon)
         }
         
 
         const gold = Math.floor(Math.random() * (51))    // sous aléatoire de 0 à 50
 
-        super(1, name, 1, xp, str, end, weapons, gold);      // créer le monstre en utilisant le constructor de la clase Participant
+        super(1, name, 1, xp, str, end, weapon, gold);      // créer le monstre en utilisant le constructor de la clase Participant
    } 
 }
 

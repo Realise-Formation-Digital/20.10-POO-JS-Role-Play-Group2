@@ -4,15 +4,30 @@ import {startGame} from '../game.js'
 
 // créer un joueur avec 10 points de vie, 0 points d'expérience, 1 point de force, une arme (qui est un créé avec la function Weapon et 2o piéces d'argent)
 class Player extends Participant {
-  constructor(name) {
+    constructor(name) {
+      const initialWeapon = new Weapon(1,"Epee", 0, 1, 1, true);
+      super(1, name, 10, 0, 1, 1, initialWeapon, 20);     // créer le joueur en utilisant le constructor de la clase Participant
+      this._inventory = [initialWeapon]
+    }
 
-    console.log("dos pepes")
-    const initialWeapon = new Weapon(1,"Epee", 0, 1, 1);
-    super(1, name, 10, 0, 1, 1, [initialWeapon], 20)      // créer le joueur en utilisant le constructor de la clase Participant
+
+
+  static PlayerFabric(id, name, hp, xp, str, end, gold, weapon, inventory) {
+    let player = new Player(name)
+    player._id = id;
+    player._hp = hp;
+    player._xp = xp;
+    player._str = str;
+    player._end = end;
+    player._gold = gold;
+    player._wpns = weapon;
+    player.inventory = inventory;
+
+    return player;
   }
 
 
-  //methods
+      //methods
   show() {
     console.log("[Player][show] Showing player")
     document.getElementById("inventory").innerHTML = "Name: " + this._name + "<br>HP: " + this._hp + "<br>XP: " + this._xp + "<br>STR: " + this._str + "<br>END: " + this._end + "<br>Gold: " + this._gold;
@@ -73,6 +88,10 @@ class Player extends Participant {
     return this._gold ;
   } 
 
+  getInventory() {
+    return this._inventory;
+  }
+  
 
  // life: this.#player.getLife(),  = this._hp = hp;
  // xp: this.#player.getXp(),   = this._xp = xp;
@@ -117,5 +136,6 @@ class Player extends Participant {
   }
 
 }
+
 
 export default Player
