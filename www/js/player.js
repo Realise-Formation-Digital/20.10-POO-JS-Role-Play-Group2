@@ -14,7 +14,7 @@ let PlayerMoves = {
         // Who attacks first? 
         let getPlayerSpeed = player.speed;
         let getEnemySpeed = enemy.speed;
-        console.log("calcAttack");
+        // OK console.log("calcAttack"); 
         // Player attacks
         let playerAttack = function () {
             let calcBaseDamage;
@@ -24,6 +24,8 @@ let PlayerMoves = {
                 calcBaseDamage = player.strength * player.agility / 1000;
             }
             console.log("who s first");
+
+            // Adding random generator to add a bit of luck
             let offsetDamage = Math.floor(Math.random() * Math.floor(10));
             let calcOutputDamage = calcBaseDamage + offsetDamage;
             // Number of hits
@@ -63,13 +65,13 @@ let PlayerMoves = {
             } else {
                 getEnemyHealth.innerHTML = 'Health: ' + enemy.health;
                 // Enemy attacks
-                let enemyAtackValues = enemyAttack();
+                let enemyAttackValues = enemyAttack();
                 let totalDamage = enemyAttackValues[0] * enemyAttackValues[1];
                 player.health = player.health - totalDamage;
                 alert("Enemy hit " + playerAttackValues[0] + " damages" + enemyAttackValues[1] + " times");
                 if (player.health <= 0) {
                     alert("You Lose Muahahahaaaaaaaa!!!");
-                    getPlayerHealth.innerHTML = 'Health: 0';
+                    getPlayerHealth.innerHTML = 'Health: ' + enemy.health;
                     getEnemyHealth.innerHTML = 'Health: ' + enemy.health;
                 } else {
                     getPlayerHealth.innerHTML = 'Health: ' + player.health;
