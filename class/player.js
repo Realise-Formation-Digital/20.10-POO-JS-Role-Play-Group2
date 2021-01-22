@@ -31,8 +31,9 @@ class Player extends Participant {
     } else { wpn = "" }
 
     let inv = "<hr>Inventory:";
-    if (typeof this._inventory[0] != "undefined" && this._inventory[0] != null && this._inventory.length != null && this._inventory.length > 0) {
+    
       for (let i = 0; i < this._inventory.length; i++) {
+        if (typeof this._inventory[i] != "undefined" && this._inventory[i] != null && this._inventory.length != null && this._inventory.length > 0) {
         inv += "<br>Weapon: " + this._inventory[i].name + "(STR: " + this._inventory[i]._str + " END: " + this._inventory[i]._end + " Price: " + this._inventory[i]._price + ") <button class = 'equip'>Equip</button>";
       }
     };
@@ -78,6 +79,7 @@ class Player extends Participant {
    */
   fight(monster) {
     console.log(monster);
+    console.log(this)
     let fightPlayer = (this._hp + this._xp + this._end + this._str);
     let fightMonster = (monster._hp + monster._xp + monster._end + monster._str);
     if (fightPlayer >= fightMonster) {
@@ -91,6 +93,7 @@ class Player extends Participant {
       }
       return "Victory!!";
     } else {
+      this.dropWeapon(monster);
       this._hp -= 1;
       if (this.dead()) {
         alert("You Died");
@@ -112,7 +115,9 @@ class Player extends Participant {
   }
 
   dropWeapon(monster){
-    if(monster._wpns) {
+    console.log(monster._wpns);
+    console.log(this._inventory)
+    if(typeof monster._wpns != "undefined" && monster._wpns != null) {
       this._inventory.push(monster._wpns[0]);
     }
   }

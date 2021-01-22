@@ -10,7 +10,7 @@ let npc = null
  // instance of the weapone for the monster 1
 
 let  npcWeaponFlecha = new Weapon("Flecha", 10) // new weapon for npc
-let npcWeaponMisil = new Weapon("Misil", 50) // new weapon for npc
+let npcWeaponMisil = new Weapon("Misil", 50, 50, 50) // new weapon for npc
 let npcWeaponMachineGun = new Weapon("MachineGun", 60) // new weapon for npc
 let npcWeaponRevolver = new Weapon("Revolver", 35) // new weapon for npc
 let npcWeaponNuke = new Weapon("Nuke", 75) // new weapon for npc
@@ -26,6 +26,7 @@ let monster3 = new Monster("elf", monsterweapon);
 let monster4 = new Monster("vampire", npcWeaponMachineGun);
 let monster5 = new Monster("Satan", npcWeaponNuke);
 let arrayMonster = []
+let arrayWeapon = [npcWeaponMisil]
 let arrayPrenom = ['Marco', 'Anton', 'Dario']
 /** 
 let x =  document.getElementById("cont");
@@ -60,11 +61,14 @@ export async function startGame() {
     
     for (let i = 0; i < 50; i++) {
 
-      const name = arrayPrenom[Math.floor(Math.random() * Math.floor(arrayPrenom.length - 1))]
+      const name = arrayPrenom[Math.floor(Math.random() * Math.floor(arrayPrenom.length - 1))];
+      let weapon = null;
 
-
-
-      let monster = new Monster(name)
+      if(Math.floor(Math.random() * Math.floor(4)) == 1) {
+        weapon = arrayWeapon[Math.floor(Math.random() * Math.floor(arrayWeapon.length))]
+      }
+      
+      let monster = new Monster(name, weapon)
       arrayMonster.push(monster)
     }
     

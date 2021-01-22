@@ -9,7 +9,6 @@ class Participant {
         this._gold = gold;
         this._wpns = wpns;
         this._inventory = [];
-        this._monsters = monsters
     }         
 }
 
