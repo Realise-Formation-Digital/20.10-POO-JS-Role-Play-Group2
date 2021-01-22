@@ -1,21 +1,51 @@
 let player;
 
-function Player(classType, health, mana, strength, agility, speed) {
+function Player(classType, hp, xp, str, end, gold, wpns) {
     this.classType = classType;
-    this.health = health;
-    this.mana = mana;
-    this.strength = strength;
-    this.agility = agility;
-    this.speed = speed;
+    this.hp = hp;
+    this.xp = xp;
+    this.str = str;
+    this.end = end;
+    this.gold = gold;
+    this.wpns = wpns;
 }
+
+// Functions: 
+function playerAttack () {
+    let calcBaseDamage;
+    calcBaseDamage = player.str * player.end / 1000;
+    console.log("calcBaseDamage");
+
+    // Adding random generator to add a bit of luck
+    let offsetDamage = Math.floor(Math.random() * Math.floor(10));
+    let calcOutputDamage = calcBaseDamage + offsetDamage;
+    // Number of hits
+    let numberOfHits = Math.floor(Math.random() * Math.floor(player.end / 10) / 2) + 1;
+    let attackValues = [calcOutputDamage, numberOfHits];
+    return attackValues;
+}
+
+
+function enemyAttack() {
+    let calcBaseDamage;
+    calcBaseDamage = enemy.str * enemy.end / 1000;
+    // Adding random generator to add a bit of luck
+    let offsetDamage = Math.floor(Math.random() * Math.floor(10));
+    let calcOutputDamage = calcBaseDamage + offsetDamage;
+    // Number of hits
+    let numberOfHits = Math.floor(Math.random() * Math.floor(enemy.end / 10) / 2) + 1;
+    let enemyAttackValues = [calcOutputDamage, numberOfHits];
+    return enemyAttackValues;
+}
+
 
 // Player mouvements
 let PlayerMoves = {
     // Attack
     calcAttack: function () {
         // Who attacks first? 
-        let getPlayerSpeed = player.speed;
-        let getEnemySpeed = enemy.speed;
+        let getPlayerSpeed = player.end;
+        let getEnemySpeed = enemy.end;
         console.log("calcAttack"); 
         // Player attacks
         playerAttack()
@@ -28,64 +58,31 @@ let PlayerMoves = {
         let playerAttackValues = playerAttack();
         if (getPlayerSpeed >= getEnemySpeed) {
             let totalDamage = playerAttackValues[0] * playerAttackValues[1];
-            enemy.health = enemy.health - totalDamage;
+            enemy.hp = enemy.hp - totalDamage;
             alert("You hit " + playerAttackValues[0] + " damages" + playerAttackValues[1] + " times");
         }else{
             enemyAttack(); 
         }
-            if (enemy.health <= 0) {
+            if (enemy.hp <= 0) {
                 alert("You won!!!");
-                getPlayerHealth.innerHTML = 'Health: ' + player.health;
-                getEnemyHealth.innerHTML = 'Health: 0';
+                getPlayerHealth.innerHTML = 'HP: ' + player.hp;
+                getEnemyHealth.innerHTML = 'HP: 0';
             } else {
-                getEnemyHealth.innerHTML = 'Health: ' + enemy.health;
+                getEnemyHealth.innerHTML = 'HP: ' + enemy.hp;
                 // Enemy attacks
                 let enemyAttackValues = enemyAttack();
                 let totalDamage = enemyAttackValues[0] * enemyAttackValues[1];
-                player.health = player.health - totalDamage;
+                player.hp = player.hp - totalDamage;
                 alert("Enemy hit " + playerAttackValues[0] + " damages" + enemyAttackValues[1] + " times");
-                if (player.health <= 0) {
+                if (player.hp <= 0) {
                     alert("You Lose Muahahahaaaaaaaa!!!");
-                    getPlayerHealth.innerHTML = 'Health: ' + enemy.health;
-                    getEnemyHealth.innerHTML = 'Health: ' + enemy.health;
+                    getPlayerHealth.innerHTML = 'Health: ' + enemy.hp;
+                    getEnemyHealth.innerHTML = 'Health: ' + enemy.hp;
                 } else {
-                    getPlayerHealth.innerHTML = 'Health: ' + player.health;
+                    getPlayerHealth.innerHTML = 'Health: ' + player.hp;
                 }
             }
     }
     
 }
 
-function playerAttack () {
-    let calcBaseDamage;
-    if (player.mana > 0) {
-        calcBaseDamage = player.strength * player.mana / 1000;
-    } else {
-        calcBaseDamage = player.strength * player.agility / 1000;
-    }
-    console.log("who s first");
-
-    // Adding random generator to add a bit of luck
-    let offsetDamage = Math.floor(Math.random() * Math.floor(10));
-    let calcOutputDamage = calcBaseDamage + offsetDamage;
-    // Number of hits
-    let numberOfHits = Math.floor(Math.random() * Math.floor(player.agility / 10) / 2) + 1;
-    let attackValues = [calcOutputDamage, numberOfHits];
-    return attackValues;
-}
-
-
-function enemyAttack() {
-    let calcBaseDamage;
-    if (player.mana > 0) {
-        calcBaseDamage = enemy.strength * enemy.mana / 1000;
-    } else {
-        calcBaseDamage = enemy.strength * enemy.agility / 1000;
-    }
-    let offsetDamage = Math.floor(Math.random() * Math.floor(10));
-    let calcOutputDamage = calcBaseDamage + offsetDamage;
-    // Number of hits
-    let numberOfHits = Math.floor(Math.random() * Math.floor(enemy.agility / 10) / 2) + 1;
-    let enemyAttackValues = [calcOutputDamage, numberOfHits];
-    return enemyAttackValues;
-}
