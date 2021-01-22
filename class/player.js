@@ -24,6 +24,8 @@ class Player extends Participant {
   show() {
     // create variables strings with weapon parameters
     let wpn = "<br>Weapon: ";
+    let str = "<br>STR: " + this._str + " <button id = 'str'>Upgrade</button>";
+    let end = "<br>END: " + this._end + " <button id = 'end'>Upgrade</button>";
     if (typeof this._wpns != "undefined" && this._wpns != null && this._wpns.length != null && this._wpns.length > 0) {
       wpn += this._wpns[0].name + "(STR: " + this._wpns[0]._str + " END: " + this._wpns[0]._end + " Price: " + this._wpns[0]._price + ")" + " <button id = 'unequip'>Unequip</button>"
     } else { wpn = "" }
@@ -36,7 +38,7 @@ class Player extends Participant {
     };
 
     //write character and weapon parameters in html
-    document.getElementById("stats").innerHTML = "Name: " + this._name + "<br>HP: " + this._hp + "<br>XP: " + this._xp + "<br>STR: " + this._str + "<br>END: " + this._end + "<br>Gold: " + this._gold + wpn + inv;
+    document.getElementById("stats").innerHTML = "Name: " + this._name + "<br>HP: " + this._hp + "<br>XP: " + this._xp + str + end + "<br>Gold: " + this._gold + wpn + inv;
 
     //add functions to buttons
     let unequipBtn = document.getElementById('unequip')
@@ -54,6 +56,20 @@ class Player extends Participant {
         })
       }
     }
+
+    let strBtn = document.getElementById('str')
+    if (strBtn) {
+      strBtn.addEventListener('click', () => {
+        this.buyStrength();
+      })
+    }
+
+    let endBtn = document.getElementById('end')
+    if (endBtn) {
+      endBtn.addEventListener('click', () => {
+        this.buyEndurance();
+      })
+    }
   }
 
   /**
@@ -61,18 +77,23 @@ class Player extends Participant {
    * @param {Object} monster - Monster angainst we want to fight
    */
   fight(monster) {
-    console.log("[Player][fight] Player fight against monster", monster)
     console.log(monster);
     let fightPlayer = (this._hp + this._xp + this._end + this._str);
     let fightMonster = (monster._hp + monster._xp + monster._end + monster._str);
     if (fightPlayer >= fightMonster) {
-      this._xp += monster._xp;
+      this._xp += 1;
       this._gold += monster._gold;
+      this.dropWeapon(monster);
+      
+      if(this._xp === 50){
+        alert("You Won!!")
+        startGame();
+      }
       return "Victory!!";
     } else {
       this._hp -= 1;
       if (this.dead()) {
-        console.log("You Died");
+        alert("You Died");
         startGame();
       } return "Defeat";
     }
@@ -88,6 +109,12 @@ class Player extends Participant {
   // function mourir
   dead() {
     return this._hp === 0
+  }
+
+  dropWeapon(monster){
+    if(monster._wpns) {
+      this._inventory.push(monster._wpns[0]);
+    }
   }
 
   equipWeapon(i) {
@@ -114,12 +141,26 @@ class Player extends Participant {
     this.show();
   }
 
-  byStrength() {
+  buyStrength() {
     // function échanger 100 sous contre un point de force
+    if(this._gold >= 100) {
+      this._str += 1;
+      this._gold -= 100;
+      this.show();
+    } else {
+      alert("Not enough gold!")
+    }
   }
 
   buyEndurance() {
     // function échanger 100 sous contre un point d'endurance
+    if(this._gold >= 100) {
+      this._end += 1;
+      this._gold -= 100;
+      this.show();
+    } else {
+      alert("Not enough gold!")
+    }
   }
 
 }
