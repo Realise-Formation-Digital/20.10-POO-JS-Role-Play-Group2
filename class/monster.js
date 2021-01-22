@@ -17,8 +17,8 @@ class Monster extends Participant {
         
 
            // sous aléatoire de 0 à 50
-
-        super(name, 1, xp, str, end, gold, [weapons]);      // créer le monstre en utilisant le constructor de la clase Participant
+         //  let monster1 = new Monster("Werewolf");
+        super(name, 1, xp, str, end, gold, [weapons], []);      // créer le monstre en utilisant le constructor de la clase Participant
    } 
 }
 

@@ -5,19 +5,28 @@ import NPC from './class/npc.js'
 
 let state = {}
 let player1 = null
-let monster1 = null
 let npc = null
-let npcWeaponFlecha = new Weapon("Flecha", 10) // new weapon for npc
+
+ // instance of the weapone for the monster 1
+
+let  npcWeaponFlecha = new Weapon("Flecha", 10) // new weapon for npc
 let npcWeaponMisil = new Weapon("Misil", 50) // new weapon for npc
+let npcWeaponMachineGun = new Weapon("MachineGun", 60) // new weapon for npc
+let npcWeaponRevolver = new Weapon("Revolver", 35) // new weapon for npc
+let npcWeaponNuke = new Weapon("Nuke", 75) // new weapon for npc
 
  // instance of the weapone for the monster 1
 
 
  let monsterweapon = new Weapon("weapon1", 30);
 
- monster1 = new Monster("Monstre1", monsterweapon);
 
-
+let monster2 = new Monster("ghost");
+let monster3 = new Monster("elf", monsterweapon);
+let monster4 = new Monster("vampire", npcWeaponMachineGun);
+let monster5 = new Monster("Satan", npcWeaponNuke);
+let arrayMonster = []
+let arrayPrenom = ['Marco', 'Anton', 'Dario']
 /** 
 let x =  document.getElementById("cont");
 x.style.display = "none";
@@ -48,6 +57,17 @@ export async function startGame() {
     let monster2 = null
     let monster1weapon = null
 
+    
+    for (let i = 0; i < 50; i++) {
+
+      const name = arrayPrenom[Math.floor(Math.random() * Math.floor(arrayPrenom.length - 1))]
+
+
+
+      let monster = new Monster(name)
+      arrayMonster.push(monster)
+    }
+    
 
     // get player from server
     playerFoundInDatabase = await getDataPlayer(1)
@@ -126,6 +146,9 @@ function selectOption(option) {
     nextTextNodeId = player1.nextEncounter();
   }
 
+
+  let singleMonster = arrayMonster[Math.floor(Math.random() * Math.floor(arrayMonster.length - 1))]
+
   //if (nextTextNodeId <= 0) {
   //   return startGame() }
 
@@ -151,13 +174,13 @@ function selectOption(option) {
 
     case 5 : {
       listNode.innerHTML = ""
-      listNode.innerHTML = monster1._name + "<br>" + monster1._xp;
+      listNode.innerHTML = singleMonster._name + "<br>XP: " + singleMonster._xp;
       break
     }
 
     case 6 : {
       listNode.innerHTML = ""
-      listNode.innerHTML = player1.fight(monster1);
+      listNode.innerHTML = player1.fight(singleMonster);
       player1.show();
       break
     } 
