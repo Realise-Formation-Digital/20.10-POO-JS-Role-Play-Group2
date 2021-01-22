@@ -5,7 +5,6 @@ import NPC from './class/npc.js'
 
 let state = {}
 let player1 = null
-let monster1 = null
 let npc = null
 let npcWeaponFlecha = new Weapon("Flecha", 10) // new weapon for npc
 let npcWeaponMisil = new Weapon("Misil", 50) // new weapon for npc
