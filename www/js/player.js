@@ -14,50 +14,23 @@ let PlayerMoves = {
         // Who attacks first? 
         let getPlayerSpeed = player.speed;
         let getEnemySpeed = enemy.speed;
-        // OK console.log("calcAttack"); 
+        console.log("calcAttack"); 
         // Player attacks
-        let playerAttack = function () {
-            let calcBaseDamage;
-            if (player.mana > 0) {
-                calcBaseDamage = player.strength * player.mana / 1000;
-            } else {
-                calcBaseDamage = player.strength * player.agility / 1000;
-            }
-            console.log("who s first");
-
-            // Adding random generator to add a bit of luck
-            let offsetDamage = Math.floor(Math.random() * Math.floor(10));
-            let calcOutputDamage = calcBaseDamage + offsetDamage;
-            // Number of hits
-            let numberOfHits = Math.floor(Math.random.random() * Math.floor(player.agility / 10) / 2) + 1;
-            let attackValues = [calcOutputDamage, numberOfHits];
-            return attackValues;
-        }
-
+        playerAttack()
         // Enemy attacks
-        let enemyAttack = function () {
-            let calcBaseDamage;
-            if (player.mana > 0) {
-                calcBaseDamage = enemy.strength * enemy.mana / 1000;
-            } else {
-                calcBaseDamage = enemy.strength * enemy.agility / 1000;
-            }
-            let offsetDamage = Math.floor(Math.random() * Math.floor(10));
-            let calcOutputDamage = calcBaseDamage + offsetDamage;
-            // Number of hits
-            let numberOfHits = Math.floor(Math.random.random() * Math.floor(enemy.agility / 10) / 2) + 1;
-            let attackValues = [calcOutputDamage, numberOfHits];
-            return attackValues;
-        }
+        enemyAttack()
         // Get player/enemy health 
         let getPlayerHealth = document.querySelector(".health-player");
         let getEnemyHealth = document.querySelector(".health-enemy");
         // Initiate attacks
+        let playerAttackValues = playerAttack();
         if (getPlayerSpeed >= getEnemySpeed) {
-            let playerAttackValues = playerAttack();
             let totalDamage = playerAttackValues[0] * playerAttackValues[1];
             enemy.health = enemy.health - totalDamage;
             alert("You hit " + playerAttackValues[0] + " damages" + playerAttackValues[1] + " times");
+        }else{
+            enemyAttack(); 
+        }
             if (enemy.health <= 0) {
                 alert("You won!!!");
                 getPlayerHealth.innerHTML = 'Health: ' + player.health;
@@ -77,6 +50,40 @@ let PlayerMoves = {
                     getPlayerHealth.innerHTML = 'Health: ' + player.health;
                 }
             }
-        }
     }
+    
+}
+
+function playerAttack () {
+    let calcBaseDamage;
+    if (player.mana > 0) {
+        calcBaseDamage = player.strength * player.mana / 1000;
+    } else {
+        calcBaseDamage = player.strength * player.agility / 1000;
+    }
+    console.log("who s first");
+
+    // Adding random generator to add a bit of luck
+    let offsetDamage = Math.floor(Math.random() * Math.floor(10));
+    let calcOutputDamage = calcBaseDamage + offsetDamage;
+    // Number of hits
+    let numberOfHits = Math.floor(Math.random() * Math.floor(player.agility / 10) / 2) + 1;
+    let attackValues = [calcOutputDamage, numberOfHits];
+    return attackValues;
+}
+
+
+function enemyAttack() {
+    let calcBaseDamage;
+    if (player.mana > 0) {
+        calcBaseDamage = enemy.strength * enemy.mana / 1000;
+    } else {
+        calcBaseDamage = enemy.strength * enemy.agility / 1000;
+    }
+    let offsetDamage = Math.floor(Math.random() * Math.floor(10));
+    let calcOutputDamage = calcBaseDamage + offsetDamage;
+    // Number of hits
+    let numberOfHits = Math.floor(Math.random() * Math.floor(enemy.agility / 10) / 2) + 1;
+    let enemyAttackValues = [calcOutputDamage, numberOfHits];
+    return enemyAttackValues;
 }
