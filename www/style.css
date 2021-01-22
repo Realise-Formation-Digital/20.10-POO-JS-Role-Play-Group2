@@ -86,12 +86,16 @@ img {
   .btn-prefight {
     width: 100% !important;
   }
+
+
   
   .actions {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
   }
+
+
   
   .actions a {
     width: 33.33%;
