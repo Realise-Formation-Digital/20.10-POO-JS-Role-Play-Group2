@@ -6,13 +6,21 @@ import { startGame } from '../game.js'
 class Player extends Participant {
 
   constructor(name) {
-    const initialWeapon = new Weapon("Short Sword", 10, 1, 1);
-    super(name, 10, 0, 1+ initialWeapon._str, 1+ initialWeapon._end, 20, [initialWeapon])      // créer le joueur en utilisant le constructor de la clase Participant
+    let initialWeapon = new Weapon("Short Sword", 10, 1, 1);
+
+    super(name, 10, 0, 1+ initialWeapon._str, 1+ initialWeapon._end, 20, [initialWeapon], )      // créer le joueur en utilisant le constructor de la clase Participant
   }
 
 
   //methods
-
+  nextEncounter(){
+    let random = Math.floor(Math.random() * Math.floor(5));
+    if(random == 1) {
+      return 1
+    } else {
+      return 5
+    }
+  }
   show() {
     // create variables strings with weapon parameters
     let wpn = "<br>Weapon: ";
@@ -54,37 +62,32 @@ class Player extends Participant {
    */
   fight(monster) {
     console.log("[Player][fight] Player fight against monster", monster)
+    console.log(monster);
     let fightPlayer = (this._hp + this._xp + this._end + this._str);
     let fightMonster = (monster._hp + monster._xp + monster._end + monster._str);
     if (fightPlayer >= fightMonster) {
       this._xp += monster._xp;
-      this._gold = this._gold + monster._gold;
-      console.log("win");
+      this._gold += monster._gold;
+      return "Victory!!";
     } else {
-      console.log("lose");
       this._hp -= 1;
       if (this.dead()) {
         console.log("You Died");
         startGame();
-      }
+      } return "Defeat";
     }
   }
 
   run() {
     // function fuir
+    if(this._xp > 0) {
+      this._xp -= 1
+    }
   }
 
   // function mourir
   dead() {
     return this._hp === 0
-  }
-
-  buyWeapon(weapon) {
-    // function acheter une arme
-  }
-
-  sellWeapon(weapon, pnj) {
-    // function vendre une arme
   }
 
   equipWeapon(i) {
@@ -106,6 +109,7 @@ class Player extends Participant {
     this._end -= this._wpns[0]._end;
     this._inventory.push(this._wpns[0]);
     this._wpns.splice(0, 1);
+    console.log(this._monsters);
 
     this.show();
   }

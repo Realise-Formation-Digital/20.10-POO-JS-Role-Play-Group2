@@ -10,15 +10,29 @@ let npc = null
 let npcWeaponFlecha = new Weapon("Flecha", 10) // new weapon for npc
 let npcWeaponMisil = new Weapon("Misil", 50) // new weapon for npc
 
-let monster1weapon = new Weapon("Espada", 30); // instance of the weapone for the monster 1
-monster1 = new Monster("Monstre1", monster1weapon); // new monster with weapon created
+ // instance of the weapone for the monster 1
+
+
+ let monsterweapon = new Weapon("weapon1", 30);
+
+ monster1 = new Monster("Monstre1", monsterweapon);
+
+
+/** 
+let x =  document.getElementById("cont");
+x.style.display = "none";
 
 const buttonElement = document.getElementById('test')
 buttonElement.addEventListener('click', () => {
-
-  player1.fight(monster1)
-  player1.show();
+ if (x.style.display === "none") {
+   x.style.display = "block";
+ } else {
+   x.style.display = "none";
+ }
+ showTextNode(1);
 })
+*/
+
 /**
  * Function that start the game
  */
@@ -42,7 +56,7 @@ export async function startGame() {
     //todo create new instance of player with the data found in the database
 
     state = {}
-    showTextNode(1);
+    showTextNode(4);
 
     
     player1 = new Player(); //instance de la class joueur
@@ -99,19 +113,25 @@ function showOption(option) {
   return option.requiredState === null || option.requiredState(state)
 }
 
+
 /**
  *
  * @param option
  */
 function selectOption(option) {
   // console.log("[Game][selectOption] Show select option with params", option)
-  const nextTextNodeId = option.nextText
+  let nextTextNodeId = option.nextText;
+  let listNode = document.getElementById("list");
+  if(nextTextNodeId == 5) {
+    nextTextNodeId = player1.nextEncounter();
+  }
+
   //if (nextTextNodeId <= 0) {
   //   return startGame() }
 
   switch (nextTextNodeId) {
     case 1: {
-      document.getElementById("list").innerHTML = "";
+      listNode.innerHTML = "";
       break
     }
     case 2: {
@@ -125,25 +145,43 @@ function selectOption(option) {
     }
 
     case 4 : {
-      document.getElementById("list").innerHTML = "";
+      listNode.innerHTML= "";
       break
     }
-    case 5: {
-      player1._gold -= 20;
-      player1.show();
-      break
-    }
-    case 6: {
-      player1._gold += 20;
-      player1.show();
-      break
-    }
-  }
 
+    case 5 : {
+      listNode.innerHTML = ""
+      listNode.innerHTML = monster1._name + "<br>" + monster1._xp;
+      break
+    }
+
+    case 6 : {
+      listNode.innerHTML = ""
+      listNode.innerHTML = player1.fight(monster1);
+      player1.show();
+      break
+    } 
+
+    
+      case 7 : {
+        listNode.innerHTML = ""
+        player1.run();
+        player1.show();
+        break
+      }
+    
+
+
+
+
+  }
   state = Object.assign(state, option.setState)
   console.log("State", state)
   showTextNode(nextTextNodeId)
-}
+  }
+
+  
+
 
 /**
  *
@@ -200,41 +238,56 @@ const textNodes = [
       }
     ]
   },
+{
+  id: 4,
+  text: "Find next encounter",
+  options: [
 
-  {
-    id: 4,
-    text: "...",
-  },
+    {
+      text: "Let's GO!",
+      nextText: 5
+    },
+  ]
+},
+{
+  id: 5,
+  text: "You see a monster",
+  options: [
 
-  {
-    id: 5,
-    text: "Stranger, stranger, stranger... now that's a weapon!",
-    options: [
-      {
-        text: 'Back',
-        nextText: 1
-      },
-      {
-        text: 'Leave',
-        nextText: 4
-      }
-    ]
-  },
+    {
+      text: "Fight!",
+      nextText: 6
+    },
+    {
+      text: "Run!",
+      nextText: 7
+    },
+  ]
+},
 
-  {
-    id: 6,
-    text: "Is that all, stranger?",
-    options: [
-      {
-        text: 'Back',
-        nextText: 1
-      },
-      {
-        text: 'Leave',
-        nextText: 4
-      }
-    ]
-  },
+{
+  id: 6,
+  text: "Result:",
+  options: [
+    {
+      text: "Find next encounter",
+      nextText: 4
+    },
+  ]
+},
+
+{
+  id: 7,
+  text: "Coward!",
+  options: [
+    {
+      text: "Find next encounter",
+      nextText: 5
+    },
+  ]
+}
+
+
 ]
 
 async function createPlayer (name) {
