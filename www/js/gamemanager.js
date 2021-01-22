@@ -6,13 +6,13 @@ let GameManager = {
     resetPlayer: function (classType) {
         switch (classType) {
             case "Link":
-                player = new Player(classType, 100, 0, 10, 2, 30, 1);
+                player = new Player(classType, 10, 0, 10, 2, 30, 1);
                 break;
             case "Merlin":
-                player = new Player(classType, 50, 0, 30, 5, 30, 1);
+                player = new Player(classType, 5, 0, 30, 5, 30, 1);
                 break;
             case "Skaven":
-                player = new Player(classType, 50, 0, 10, 10, 30, 1);
+                player = new Player(classType, 5, 0, 10, 10, 30, 1);
                 break;
             case "Elf":
                 player = new Player(classType, 500, 0, 1000, 2000, 1000, 5000);
@@ -22,7 +22,7 @@ let GameManager = {
         getInterface.innerHTML = '<img src="img/' + classType.toLowerCase() + '.png "class="img-avatar"><div><h3>' +
         classType + '</h3> <p class= "health-player">HP: ' + player.hp + '</p><p>XP: ' + player.xp + '</p><p>Strength: ' + 
         player.str + '</p><p>Endurance: ' + player.end + '</p><p>Gold: ' + player.gold + '</p><p>Weapon Bonus: ' + 
-        player.wpns + '</p></div><div><h3>Inventory: </h3></div><div><h3>Battle info: </h3></div>';
+        player.wpns + '</p></div>' + '<img src="img/inventory.png"> <div><h3>Inventory: </h3><p>Potion de vie</p><p>Baton en bois (+1 str)</p></div>' + '<img src="img/battleinfo.png"><div><h3>Battle info: </h3></div>';
     },
     // Create fight screne with arena and actions
     setPreFight: function () {
@@ -42,10 +42,10 @@ let GameManager = {
         let getActions = document.querySelector(".actions");
         let getEnemy = document.querySelector(".enemy");
         // create enemy 
-        let enemy00 = new Enemy("Goblin", 100, 1, 10, 2, 30, 1);
-        let enemy01 = new Enemy("Troll", 200, 1, 60, 1, 10, 1);
-        let enemy02 = new Enemy("Guardian", 100, 2, 100, 5, 100, 1);
-        let enemy03 = new Enemy("Minion", 200, 1, 60, 110, 10, 1);
+        let enemy00 = new Enemy("Goblin", 10, 1, 10, 2, 30, 1);
+        let enemy01 = new Enemy("Troll", 20, 1, 60, 1, 10, 1);
+        let enemy02 = new Enemy("Guardian", 10, 2, 100, 5, 100, 1);
+        let enemy03 = new Enemy("Minion", 20, 1, 60, 110, 10, 1);
         let chooseRandomEnemy = Math.floor(Math.random() * Math.floor(4));
         //console.log(chooseRandomEnemy); OK!
         switch (chooseRandomEnemy) {

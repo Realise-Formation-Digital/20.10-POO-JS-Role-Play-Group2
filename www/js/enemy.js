@@ -22,7 +22,7 @@ function Weapon (weaponType, hp, xp, str, end, gold, wpns){
     this.wpns = wpns;
 }
 
-function WeapoPNJ (pnjType, hp, xp, str, end, gold, wpns){
+function PNJ (pnjType, hp, xp, str, end, gold, wpns){
     this.pnjType = pnjType;
     this.hp = hp;
     this.xp = xp;

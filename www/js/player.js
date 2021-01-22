@@ -34,7 +34,7 @@ function enemyAttack() {
     let offsetDamage = Math.floor(Math.random() * Math.floor(10));
     let calcOutputDamage = calcBaseDamage + offsetDamage;
     // Number of hits
-    let numberOfHits = Math.floor(Math.random() * Math.floor(enemy.end / 10) / 2) + 1;
+    let numberOfHits = Math.floor(Math.random() * Math.floor(enemy.end)) + 1;
     let enemyAttackValues = [calcOutputDamage, numberOfHits];
     return enemyAttackValues;
 }
@@ -49,7 +49,7 @@ let PlayerMoves = {
         let getEnemySpeed = enemy.end;
         console.log("calcAttack"); 
 
-        // Get player/enemy health 
+        // Get player/enemy HP XP GOLD
         let getPlayerHealth = document.querySelector(".health-player");
         let getEnemyHealth = document.querySelector(".health-enemy");
         // Initiate attacks
@@ -58,15 +58,17 @@ let PlayerMoves = {
             let totalDamage = playerAttackValues[0] * playerAttackValues[1];
             enemy.hp = enemy.hp - totalDamage;
             alert("You hit " + playerAttackValues[0] + " damages" + playerAttackValues[1] + " times");
+            
         }else{
             enemyAttack();        }
             if (enemy.hp <= 0) {
+                player.xp = player.xp + enemy.xp;
+                player.gold = player.gold + enemy.gold;
                 alert("You won!!!");
                 getPlayerHealth.innerHTML = 'HP: ' + player.hp;
                 getEnemyHealth.innerHTML = 'HP: 0';
-                alert("Next fight");
-                player.xp +1;
                 GameManager.setFight();
+                alert("Next fight");
             } else {
                 getEnemyHealth.innerHTML = 'HP: ' + enemy.hp;
                 // Enemy attacks
