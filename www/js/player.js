@@ -58,10 +58,10 @@ let PlayerMoves = {
             let totalDamage = playerAttackValues[0] * playerAttackValues[1];
             enemy.hp = enemy.hp - totalDamage;
             alert("You hit " + playerAttackValues[0] + " damages" + playerAttackValues[1] + " times");
-            enemyAttack();
         }else{
             enemyAttack();        }
             if (enemy.hp <= 0) {
+                enemyAttack();
                 alert("You won!!!");
                 getPlayerHealth.innerHTML = 'HP: ' + player.hp;
                 getEnemyHealth.innerHTML = 'HP: 0';
