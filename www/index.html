@@ -22,36 +22,6 @@
     </div>
   </div>
 
- <!--
-  <script>
-
-      let id = 1;
-
-        let player = new Player("Alicia");
-
-        console.log("[Game][getDataPlayer] Getting data from server with params", id)
-        let playerFoundInTheDatabase = null
-        //playerFoundInTheDatabase = await window.fetch('/player?id=' + id.toString()).toJSON()
-        try {
-        
-            playerFoundInTheDatabase = fetch("database.php", {
-                method: "POST",
-                body: JSON.stringify(data),
-                mode: "same-origin",
-                credentials: "same-origin",
-                headers: {
-                  "Content-Type": "application/json"
-                }
-            }).then(function(response) {
-                console.log(response)
-            })
-        } catch (e) {
-            console.error("[Game][getDate] An error occurred", e)
-        }
-
-  </script>
- -->
-
   <div class="container" id="inventory"></div>
   <button id="test">4</button>
   <script src="classes.js"></script>

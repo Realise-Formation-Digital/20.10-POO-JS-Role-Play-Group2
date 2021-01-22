@@ -2,10 +2,10 @@ import Player from './class/player.js'
 import Weapon from './class/weapon.js'
 import Monster from './class/monster.js'
 import NPC from './class/npc.js'
-import Game from './class/logic.js'
+import DataManager from './class/manager.js'
 
 let state = {}
-let game = null
+let manager = null
 let player1 = null
 let monster1 = null
 
@@ -15,29 +15,25 @@ buttonElement.addEventListener('click', () => {
   console.log(player1)
 })
 /**
- * Function that start the game
+ * Function starGame qui toujours retourne le dernier ID que j'ai inserté 
  */
 export async function startGame() {
   try {
     console.log("[Game][StartGame] Starting game")
-
-    // let player1 = null
-    // let player2 = null
-    // let monster1 = null
     let monster2 = null
     var player1 = null
     let monster1weapon = null
     let npcWeaponFlecha = null
     let npcWeaponMisil = null
 
-    // Create a game
-    game = new Game()
+    // la funcion DataManager est en manager.js 
+    manager = new DataManager()    //creer un Manager qui va s'en ocuper de tous les donnes (Save ou Load depuis la BD)
     //get player from server
-    player1 = await game.getPlayer()//await getDataPlayer(1)
-    console.log(player1)
+    player1 = await manager.getPlayer()//await getDataPlayer(1)
+    console.log(player1)      // vient de manager.js (line 46)
     //json = JSON.parse(response.responseText)
-    if (player1 == null) {
-      player1 = await createPlayer('Player1')
+    if (player1 == null) {     // si il n'est pas dans la BD donc il faut le creer
+      await createPlayer('Player1')     // se va a créér avec la function qui est a la line 231
     }
 
     //todo create new instance of player with the data found in the database
@@ -232,45 +228,12 @@ const textNodes = [
 ]
 
 
-
-// #player;
-
-//   start() {
-//     this.#player = new Player();
-//   }
-
-//   save() {
-//     const data = {
-//       life: this.#player.getLife(),
-//       xp: this.#player.getXp(),
-//       str: this.#player.getStr(),
-//       sta: this.#player.getSta(),
-//       weapon: this.#player.getWeapon(),
-//       inventory: this.#player.getInventory(),
-//       gold: this.#player.getGold(),
-//     };
-
-//     fetch("/database.php", {
-//       method: "POST",
-//       body: JSON.stringify(data),
-//       mode: "same-origin",
-//       credentials: "same-origin",
-//       headers: {
-//         "Content-Type": "application/json"
-//       }
-//     }).then(function (response) {
-//       console.log('response', response);
-//     })
-//     .catch(function (error) {
-//       console.error(error);
-//     });
-//   }
-
-async function createPlayer (name) {
+async function createPlayer (name) {      // creer le jouer avec la functio qui es en maneger.js (line 54)  et l'enregistrer
   try{
-    game.createPlayer(name);
+    player1 = await manager.createPlayer(name);     // en player1 est le joueur qui se a créé
 
-    await game.save()
+    await manager.save()     // enregister le jouer (qui on vient de creer)  dans la BD avec la function save qui est en manager (line 97)
+
     //const result = await window.fetch('/player')
   }catch (e) {
     console.error("[Game][createPlayer] An error occured when creating player on server", e)
@@ -280,7 +243,7 @@ async function createPlayer (name) {
 async function saveData () {
   try {
     console.log("[Game][saveData] Saving data on server with params")
-    await game.save()
+    await manager.save()
   }catch (e) {
     console.error("[Game][saveData] An error occurred when saving data on server", e)
   }
