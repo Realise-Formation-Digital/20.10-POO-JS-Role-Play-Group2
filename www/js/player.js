@@ -21,7 +21,7 @@ function playerAttack () {
     let offsetDamage = Math.floor(Math.random() * Math.floor(10));
     let calcOutputDamage = calcBaseDamage + offsetDamage;
     // Number of hits
-    let numberOfHits = Math.floor(Math.random() * Math.floor(player.end / 10) / 2) + 1;
+    let numberOfHits = Math.floor(Math.random() * Math.floor(player.end) + 1);
     let attackValues = [calcOutputDamage, numberOfHits];
     return attackValues;
 }
@@ -61,12 +61,11 @@ let PlayerMoves = {
         }else{
             enemyAttack();        }
             if (enemy.hp <= 0) {
-                enemyAttack();
                 alert("You won!!!");
                 getPlayerHealth.innerHTML = 'HP: ' + player.hp;
                 getEnemyHealth.innerHTML = 'HP: 0';
                 alert("Next fight");
-                player.xp = +1;
+                player.xp +1;
                 GameManager.setFight();
             } else {
                 getEnemyHealth.innerHTML = 'HP: ' + enemy.hp;

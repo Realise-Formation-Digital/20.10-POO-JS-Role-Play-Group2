@@ -6,13 +6,13 @@ let GameManager = {
     resetPlayer: function (classType) {
         switch (classType) {
             case "Link":
-                player = new Player(classType, 100, 0, 10, 10, 20, 1);
+                player = new Player(classType, 100, 0, 10, 2, 30, 1);
                 break;
             case "Merlin":
-                player = new Player(classType, 150, 0, 300, 150, 100, 1);
+                player = new Player(classType, 50, 0, 30, 5, 30, 1);
                 break;
             case "Skaven":
-                player = new Player(classType, 50, 0, 100, 200, 100, 50);
+                player = new Player(classType, 50, 0, 10, 10, 30, 1);
                 break;
             case "Elf":
                 player = new Player(classType, 500, 0, 1000, 2000, 1000, 5000);
@@ -42,10 +42,10 @@ let GameManager = {
         let getActions = document.querySelector(".actions");
         let getEnemy = document.querySelector(".enemy");
         // create enemy 
-        let enemy00 = new Enemy("Goblin", 100, 1, 50, 100, 100, 100);
-        let enemy01 = new Enemy("Troll", 200, 1, 60, 110, 10, 10);
-        let enemy02 = new Enemy("Guardian", 200, 1, 60, 110, 10, 10);
-        let enemy03 = new Enemy("Minion", 200, 1, 60, 110, 10, 10);
+        let enemy00 = new Enemy("Goblin", 100, 1, 10, 2, 30, 1);
+        let enemy01 = new Enemy("Troll", 200, 1, 60, 1, 10, 1);
+        let enemy02 = new Enemy("Guardian", 100, 2, 100, 5, 100, 1);
+        let enemy03 = new Enemy("Minion", 200, 1, 60, 110, 10, 1);
         let chooseRandomEnemy = Math.floor(Math.random() * Math.floor(4));
         //console.log(chooseRandomEnemy); OK!
         switch (chooseRandomEnemy) {
