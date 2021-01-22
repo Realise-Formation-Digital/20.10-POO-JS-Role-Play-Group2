@@ -9,15 +9,21 @@ let monster1 = null
 let npc = null
 let npcWeaponFlecha = new Weapon("Flecha", 10) // new weapon for npc
 let npcWeaponMisil = new Weapon("Misil", 50) // new weapon for npc
+let npcWeaponMachineGun = new Weapon("MachineGun", 60) // new weapon for npc
+let npcWeaponRevolver = new Weapon("Revolver", 35) // new weapon for npc
+let npcWeaponNuke = new Weapon("Nuke", 75) // new weapon for npc
 
  // instance of the weapone for the monster 1
 
 
  let monsterweapon = new Weapon("weapon1", 30);
 
- monster1 = new Monster("Monstre1", monsterweapon);
-
-
+let monster1 = new Monster("Werewolf");
+let monster2 = new Monster("ghost");
+let monster3 = new Monster("elf", monsterweapon);
+let monster4 = new Monster("vampire", npcWeaponMachineGun);
+let monster5 = new Monster("Satan", npcWeaponNuke);
+ 
 /** 
 let x =  document.getElementById("cont");
 x.style.display = "none";
