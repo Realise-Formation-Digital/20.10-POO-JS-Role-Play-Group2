@@ -18,11 +18,12 @@ let npcWeaponNuke = new Weapon("Nuke", 75) // new weapon for npc
 
  let monsterweapon = new Weapon("weapon1", 30);
 
-let monster1 = new Monster("Werewolf");
+let monster1 = new Monster("Werewolf", npcWeaponRevolver);
 let monster2 = new Monster("ghost");
 let monster3 = new Monster("elf", monsterweapon);
 let monster4 = new Monster("vampire", npcWeaponMachineGun);
 let monster5 = new Monster("Satan", npcWeaponNuke);
+let monster6 = new Monster("Goblin");
  
 /** 
 let x =  document.getElementById("cont");
