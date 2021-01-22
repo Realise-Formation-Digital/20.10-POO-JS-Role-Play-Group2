@@ -9,6 +9,13 @@
     <script src="js/player.js"></script>
     <script src="js/enemy.js"></script>
 </head>
+
+<header>
+    <h3 class="menu">Game Data:</h3>
+    <button type="button" onclick="save()">Save</button>
+    <button type="button" onclick="load()">Load</button>
+
+</header>
 <body>
     <div class="header">
         <p>Welcome to the DUNGEON!!!</p>
@@ -27,7 +34,7 @@
             <img src="img/merlin.png" alt="merlin">
             <div>
                 <h3>Merlin the all mighty</h3>
-                <p>Low stats but powerful spells</p>
+                <p>Low HP but powerful attacks</p>
             </div>
         </a>
         <a href="#" onclick="GameManager.setGameStart('Skaven')">

@@ -1,5 +1,6 @@
 let player;
 
+// Create player:
 function Player(classType, hp, xp, str, end, gold, wpns) {
     this.classType = classType;
     this.hp = hp;
@@ -60,6 +61,7 @@ let PlayerMoves = {
             let totalDamage = playerAttackValues[0] * playerAttackValues[1];
             enemy.hp = enemy.hp - totalDamage;
             alert("You hit " + playerAttackValues[0] + " damages" + playerAttackValues[1] + " times");
+            enemyAttack();
         }else{
             enemyAttack(); 
         }
@@ -67,6 +69,8 @@ let PlayerMoves = {
                 alert("You won!!!");
                 getPlayerHealth.innerHTML = 'HP: ' + player.hp;
                 getEnemyHealth.innerHTML = 'HP: 0';
+                alert("Next fight");
+                GameManager.setFight();
             } else {
                 getEnemyHealth.innerHTML = 'HP: ' + enemy.hp;
                 // Enemy attacks

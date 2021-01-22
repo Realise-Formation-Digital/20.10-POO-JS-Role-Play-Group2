@@ -20,7 +20,9 @@ let GameManager = {
         }
         let getInterface = document.querySelector(".interface");
         getInterface.innerHTML = '<img src="img/' + classType.toLowerCase() + '.png "class="img-avatar"><div><h3>' +
-        classType + '</h3> <p class= "health-player">HP: ' + player.hp + '</p><p>XP: ' + player.xp + '</p><p>Strength: ' + player.str + '</p><p>Endurance: ' + player.end + '</p><p>Gold: ' + player.gold + '</p><p>Weapon Bonus: ' + player.wpns + '</p></div><div><h3>Inventaire: </h3>';
+        classType + '</h3> <p class= "health-player">HP: ' + player.hp + '</p><p>XP: ' + player.xp + '</p><p>Strength: ' + 
+        player.str + '</p><p>Endurance: ' + player.end + '</p><p>Gold: ' + player.gold + '</p><p>Weapon Bonus: ' + 
+        player.wpns + '</p></div><div><h3>Inventory: </h3></div><div><h3>Battle info: </h3></div>';
     },
     // Create fight screne with arena and actions
     setPreFight: function () {
@@ -42,7 +44,9 @@ let GameManager = {
         // create enemy 
         let enemy00 = new Enemy("Goblin", 100, 1, 50, 100, 100, 100);
         let enemy01 = new Enemy("Troll", 200, 1, 60, 110, 10, 10);
-        let chooseRandomEnemy = Math.floor(Math.random() * Math.floor(2));
+        let enemy02 = new Enemy("Guardian", 200, 1, 60, 110, 10, 10);
+        let enemy03 = new Enemy("Minion", 200, 1, 60, 110, 10, 10);
+        let chooseRandomEnemy = Math.floor(Math.random() * Math.floor(4));
         //console.log(chooseRandomEnemy); OK!
         switch (chooseRandomEnemy) {
             case 0:
@@ -50,6 +54,12 @@ let GameManager = {
                 break;
             case 1:
                 enemy = enemy01;
+                break;
+            case 2:
+                enemy = enemy02;
+                break;
+            case 3:
+                enemy = enemy03;
                 break;
         }
         getHeader.innerHTML = '<p>What will you do next?</p>';
@@ -59,7 +69,20 @@ let GameManager = {
         '</p><p>XP: ' + enemy.xp + '</p><p>Strength: ' + enemy.str + '</p><p>Endurance: ' + enemy.end + 
         '</p><p>Gold: ' + enemy.gold + '</p><p>Weapon Bonus: ' + enemy.wpns + '</p></div>';
     }
+    
+
+
 }
 
 
+/*
+//Save Load
+save: function (){
+    alert('Game Saved')
+}
+
+load: function (){
+    alert('This will delete current data, continue?')
+}
+*/
 
