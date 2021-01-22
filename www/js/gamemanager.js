@@ -77,12 +77,17 @@ let GameManager = {
 
 /*
 //Save Load
+
 save: function (){
-    alert('Game Saved')
+    
+    alert('Game Saved');
+    console.log("Save");
 }
 
 load: function (){
-    alert('This will delete current data, continue?')
+
+    alert('This will delete current data, continue?');
+    console.log("Load");
 }
 */
 

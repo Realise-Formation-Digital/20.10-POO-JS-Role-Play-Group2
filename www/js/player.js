@@ -48,10 +48,7 @@ let PlayerMoves = {
         let getPlayerSpeed = player.end;
         let getEnemySpeed = enemy.end;
         console.log("calcAttack"); 
-        // Player attacks
-        playerAttack()
-        // Enemy attacks
-        enemyAttack()
+
         // Get player/enemy health 
         let getPlayerHealth = document.querySelector(".health-player");
         let getEnemyHealth = document.querySelector(".health-enemy");
@@ -63,13 +60,13 @@ let PlayerMoves = {
             alert("You hit " + playerAttackValues[0] + " damages" + playerAttackValues[1] + " times");
             enemyAttack();
         }else{
-            enemyAttack(); 
-        }
+            enemyAttack();        }
             if (enemy.hp <= 0) {
                 alert("You won!!!");
                 getPlayerHealth.innerHTML = 'HP: ' + player.hp;
                 getEnemyHealth.innerHTML = 'HP: 0';
                 alert("Next fight");
+                player.xp = +1;
                 GameManager.setFight();
             } else {
                 getEnemyHealth.innerHTML = 'HP: ' + enemy.hp;
@@ -78,12 +75,15 @@ let PlayerMoves = {
                 let totalDamage = enemyAttackValues[0] * enemyAttackValues[1];
                 player.hp = player.hp - totalDamage;
                 alert("Enemy hit " + playerAttackValues[0] + " damages" + enemyAttackValues[1] + " times");
+                playerAttack();
                 if (player.hp <= 0) {
                     alert("You Lose Muahahahaaaaaaaa!!!");
-                    getPlayerHealth.innerHTML = 'Health: ' + enemy.hp;
-                    getEnemyHealth.innerHTML = 'Health: ' + enemy.hp;
+                    getPlayerHealth.innerHTML = 'HP: ' + enemy.hp;
+                    getEnemyHealth.innerHTML = 'HP: ' + enemy.hp;
+                    window.location.reload();
                 } else {
-                    getPlayerHealth.innerHTML = 'Health: ' + player.hp;
+                    getPlayerHealth.innerHTML = 'HP: ' + player.hp;
+                    playerAttack();
                 }
             }
     }
