@@ -7,27 +7,18 @@ let state = {}
 let player1 = null
 let npc = null
 
- // instance of the weapone for the monster 1
+// instance of the weapone for the monster 1
 
-let  npcWeaponFlecha = new Weapon("Flecha", 10) // new weapon for npc
-let npcWeaponMisil = new Weapon("Misil", 50, 50, 50) // new weapon for npc
-let npcWeaponMachineGun = new Weapon("MachineGun", 60) // new weapon for npc
-let npcWeaponRevolver = new Weapon("Revolver", 35) // new weapon for npc
-let npcWeaponNuke = new Weapon("Nuke", 75) // new weapon for npc
-
- // instance of the weapone for the monster 1
+let npcWeaponKnife = new Weapon("Bandit's Knife", 10, 5, 5) // new weapon for npc
+let npcWeaponClaymore = new Weapon("Claymore", 90, 50, 50) // new weapon for npc
+let npcWeaponDrake = new Weapon("Drake Sword", 110, 60, 60) // new weapon for npc
+let npcWeaponBroadsword = new Weapon("Broadsword", 60, 35, 35) // new weapon for npc
+let npcWeaponGreatsword = new Weapon("Greatsword of Artorias", 400, 200, 200) // new weapon for npc
 
 
- let monsterweapon = new Weapon("weapon1", 30);
-
-
-let monster2 = new Monster("ghost");
-let monster3 = new Monster("elf", monsterweapon);
-let monster4 = new Monster("vampire", npcWeaponMachineGun);
-let monster5 = new Monster("Satan", npcWeaponNuke);
 let arrayMonster = []
-let arrayWeapon = [npcWeaponMisil]
-let arrayPrenom = ['Marco', 'Anton', 'Dario']
+let arrayPrenom = ['Werewolf', 'Wild Dog', 'Ghost', 'Silver Knight', 'Serpent Mage', 'Drake', 'Banshee', 'Basilisk', 'Hollow', 'Giant', 'Elf', 'Stone Demon', 'Vampire', 'Skeleton', 'Marco', 'Fred', 'Julien'];
+let arrayWeapon = [npcWeaponKnife, npcWeaponClaymore, npcWeaponDrake, npcWeaponBroadsword, npcWeaponGreatsword];
 /** 
 let x =  document.getElementById("cont");
 x.style.display = "none";
@@ -58,20 +49,20 @@ export async function startGame() {
     let monster2 = null
     let monster1weapon = null
 
-    
+
     for (let i = 0; i < 50; i++) {
 
       const name = arrayPrenom[Math.floor(Math.random() * Math.floor(arrayPrenom.length - 1))];
       let weapon = null;
 
-      if(Math.floor(Math.random() * Math.floor(4)) == 1) {
+      if (Math.floor(Math.random() * Math.floor(4)) == 1) {
         weapon = arrayWeapon[Math.floor(Math.random() * Math.floor(arrayWeapon.length))]
       }
-      
+
       let monster = new Monster(name, weapon)
       arrayMonster.push(monster)
     }
-    
+
 
     // get player from server
     playerFoundInDatabase = await getDataPlayer(1)
@@ -82,13 +73,13 @@ export async function startGame() {
     state = {}
     showTextNode(4);
 
-    
+
     player1 = new Player(); //instance de la class joueur
     player1.show();
-    npc = new NPC([npcWeaponFlecha, npcWeaponMisil], player1); // new instance of npc with two weapon already declared 
+    npc = new NPC(arrayWeapon, player1); // new instance of npc with two weapon already declared 
     // monster2 = new Monster("Monstre2", null); // new monster without weapon
 
-  }catch (e) {
+  } catch (e) {
     console.error(e)
   }
 }
@@ -124,11 +115,11 @@ function showTextNode(textNodeIndex) {
   // add options from nodes
   textNode.options.forEach(option => {
     //if (showOption(option)) {
-      const button = document.createElement('button')
-      button.innerText = option.text
-      button.classList.add('btn')
-      button.addEventListener('click', () => selectOption(option))
-      optionButtonsElement.appendChild(button)
+    const button = document.createElement('button')
+    button.innerText = option.text
+    button.classList.add('btn')
+    button.addEventListener('click', () => selectOption(option))
+    optionButtonsElement.appendChild(button)
     //}
   })
 }
@@ -146,10 +137,9 @@ function selectOption(option) {
   // console.log("[Game][selectOption] Show select option with params", option)
   let nextTextNodeId = option.nextText;
   let listNode = document.getElementById("list");
-  if(nextTextNodeId == 5) {
+  if (nextTextNodeId == 5) {
     nextTextNodeId = player1.nextEncounter();
   }
-
 
   let singleMonster = arrayMonster[Math.floor(Math.random() * Math.floor(arrayMonster.length - 1))]
 
@@ -159,6 +149,7 @@ function selectOption(option) {
   switch (nextTextNodeId) {
     case 1: {
       listNode.innerHTML = "";
+      listNode.innerHTML = "Welcome.. Got a selection of good things on sale, stranger!";
       break
     }
     case 2: {
@@ -171,43 +162,39 @@ function selectOption(option) {
       break
     }
 
-    case 4 : {
-      listNode.innerHTML= "";
+    case 4: {
+      listNode.innerHTML = "";
       break
     }
 
-    case 5 : {
+    case 5: {
       listNode.innerHTML = ""
       listNode.innerHTML = singleMonster._name + "<br>XP: " + singleMonster._xp;
       break
     }
 
-    case 6 : {
+    case 6: {
       listNode.innerHTML = ""
       listNode.innerHTML = player1.fight(singleMonster);
       player1.show();
       break
-    } 
+    }
 
-    
-      case 7 : {
-        listNode.innerHTML = ""
-        player1.run();
-        player1.show();
-        break
-      }
-    
-
-
+    case 7: {
+      listNode.innerHTML = ""
+      player1.run();
+      player1.show();
+      break
+    }
 
 
   }
   state = Object.assign(state, option.setState)
   console.log("State", state)
   showTextNode(nextTextNodeId)
-  }
+}
 
-  
+
 
 
 /**
@@ -218,7 +205,7 @@ const textNodes = [
 
   {
     id: 1,
-    text: 'Welcome.. Got a selection of good things on sale, stranger!',
+    text: 'You see the vendor. ',
     options: [
       {
         text: 'Buy',
@@ -265,84 +252,84 @@ const textNodes = [
       }
     ]
   },
-{
-  id: 4,
-  text: "Find next encounter",
-  options: [
+  {
+    id: 4,
+    text: "Find next encounter",
+    options: [
 
-    {
-      text: "Let's GO!",
-      nextText: 5
-    },
-  ]
-},
-{
-  id: 5,
-  text: "You see a monster",
-  options: [
+      {
+        text: "Let's GO!",
+        nextText: 5
+      },
+    ]
+  },
+  {
+    id: 5,
+    text: "You see a monster",
+    options: [
 
-    {
-      text: "Fight!",
-      nextText: 6
-    },
-    {
-      text: "Run!",
-      nextText: 7
-    },
-  ]
-},
+      {
+        text: "Fight!",
+        nextText: 6
+      },
+      {
+        text: "Run!",
+        nextText: 7
+      },
+    ]
+  },
 
-{
-  id: 6,
-  text: "Result:",
-  options: [
-    {
-      text: "Find next encounter",
-      nextText: 4
-    },
-  ]
-},
+  {
+    id: 6,
+    text: "Result:",
+    options: [
+      {
+        text: "Find next encounter",
+        nextText: 5
+      },
+    ]
+  },
 
-{
-  id: 7,
-  text: "Coward!",
-  options: [
-    {
-      text: "Find next encounter",
-      nextText: 5
-    },
-  ]
-}
+  {
+    id: 7,
+    text: "Coward!",
+    options: [
+      {
+        text: "Find next encounter",
+        nextText: 5
+      },
+    ]
+  }
 
 
 ]
 
-async function createPlayer (name) {
-  try{
+async function createPlayer(name) {
+  try {
     console.log("[Game][createPlayer] Creating player on server with params", name)
     player1 = new Player(name)
     const result = await window.fetch('/player')
-  }catch (e) {
+  } catch (e) {
     console.error("[Game][createPlayer] An error occured when creating player on server", e)
   }
 }
 
-async function getDataPlayer (id) {
-  try{
+async function getDataPlayer(id) {
+  try {
     console.log("[Game][getDataPlayer] Getting data from server with params", id)
     let playerFoundInTheDatabase = null
     playerFoundInTheDatabase = await window.fetch('/player?id=' + id.toString()).toJSON()
     return playerFoundInTheDatabase
-  }catch (e) {
+  } catch (e) {
     console.error("[Game][getDate] An error occurred", e)
   }
 }
 
-async function saveData () {
+async function saveData() {
   try {
     console.log("[Game][saveData] Saving data on server with params")
 
-  }catch (e) {
+  } catch (e) {
     console.error("[Game][saveData] An error occurred when saving data on server", e)
   }
 }

@@ -78,22 +78,20 @@ class Player extends Participant {
    * @param {Object} monster - Monster angainst we want to fight
    */
   fight(monster) {
-    console.log(monster);
-    console.log(this)
-    let fightPlayer = (this._hp + this._xp + this._end + this._str);
-    let fightMonster = (monster._hp + monster._xp + monster._end + monster._str);
+    // Compare parameters of player and monster
+    let fightPlayer = (this._hp +  this._end + this._str);
+    let fightMonster = (monster._hp +  monster._end + monster._str);
+    // if more stats - win
     if (fightPlayer >= fightMonster) {
       this._xp += 1;
       this._gold += monster._gold;
-      this.dropWeapon(monster);
-      
+      this.dropWeapon(monster);   
       if(this._xp === 50){
         alert("You Won!!")
         startGame();
       }
       return "Victory!!";
     } else {
-      this.dropWeapon(monster);
       this._hp -= 1;
       if (this.dead()) {
         alert("You Died");
@@ -115,9 +113,8 @@ class Player extends Participant {
   }
 
   dropWeapon(monster){
-    console.log(monster._wpns);
-    console.log(this._inventory)
-    if(typeof monster._wpns != "undefined" && monster._wpns != null) {
+  //if monster have weapon push to invenotry
+    if(typeof monster._wpns[0] != "undefined" && monster._wpns[0] != null) {
       this._inventory.push(monster._wpns[0]);
     }
   }

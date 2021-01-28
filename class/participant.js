@@ -1,6 +1,6 @@
 class Participant {
 
-    constructor(name, hp, xp, str, end, gold, wpns, monsters) {
+    constructor(name, hp, xp, str, end, gold, wpns) {
         this._name = name;
         this._hp = hp;
         this._xp = xp;
