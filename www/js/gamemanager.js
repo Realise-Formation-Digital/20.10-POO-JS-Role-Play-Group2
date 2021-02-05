@@ -6,24 +6,23 @@ let GameManager = {
     resetPlayer: function (classType) {
         switch (classType) {
             case "Link":
-                player = new Player(classType, 100, 0, 10, 2, 30, 1);
+                player = new Player(classType, 100, 0, 10, 2, 30, 0);
                 break;
             case "Merlin":
-                player = new Player(classType, 200, 0, 10, 2, 30, 1);
+                player = new Player(classType, 200, 0, 10, 2, 30, 0);
                 break;
             case "Skaven":
-                player = new Player(classType, 300, 0, 10, 10, 30, 1);
+                player = new Player(classType, 300, 0, 10, 3, 30, 0);
                 break;
             case "Elf":
-                player = new Player(classType, 400, 0, 1000, 2000, 1000, 5000);
+                player = new Player(classType, 400, 0, 20, 4, 30, 0);
                 break;
         }
         let getInterface = document.querySelector(".interface");
         getInterface.innerHTML = '<img src="img/' + classType.toLowerCase() + '.png "class="img-avatar"><div><h3>' +
         classType + '</h3> <p class= "health-player">HP: ' + player.hp + '</p><p class="xp-player">XP: ' + player.xp + '</p><p>Strength: ' + 
         player.str + '</p><p>Speed: ' + player.spd + '</p><p class="gold-player">Gold: ' + player.gold + '</p><p>Weapon Bonus: ' + 
-        player.wpns + '</p></div>' + '<img src="img/inventory.png"> <div><h3>Inventory: </h3><p>Life Potion</p><p>Wooden Stick (+1 str)</p></div>' 
-        + '<img src="img/battleinfo.png"><div class="battleInfo><h3>Battle info: </h3></div>';
+        player.wpns + '</p></div>' + '<img src="img/inventory.png"> <div><h3>Inventory: </h3><p>Life potion (+50 hp)<button onclick="lifePotion()">Use</button><p>Wooden Stick (+1 str)</p></div>';
     },
     // Create fight screne with arena and actions
     setPreFight: function () {
@@ -46,8 +45,8 @@ let GameManager = {
         // create enemy 
         let enemy00 = new Enemy("Goblin", 50, 1, 10, 2, 1, 1);
         let enemy01 = new Enemy("Troll", 100, 1, 20, 1, 2, 1);
-        let enemy02 = new Enemy("Guardian", 150, 1, 25, 3, 100, 1);
-        let enemy03 = new Enemy("Minion", 200, 1, 30, 4, 10, 1);
+        let enemy02 = new Enemy("Guardian", 150, 1, 25, 3, 100, 0);
+        let enemy03 = new Enemy("Minion", 200, 1, 30, 4, 10, 2);
         let chooseRandomEnemy = Math.floor(Math.random() * Math.floor(4));
         //console.log(chooseRandomEnemy); OK!
         switch (chooseRandomEnemy) {
@@ -77,19 +76,19 @@ let GameManager = {
 }
 
 
-/*
+
 //Save Load
 
-save: function (){
+function save(){
     
     alert('Game Saved');
     console.log("Save");
 }
 
-load: function (){
+function load(){
 
     alert('This will delete current data, continue?');
     console.log("Load");
 }
-*/
+
 

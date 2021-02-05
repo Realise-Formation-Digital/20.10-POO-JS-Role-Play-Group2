@@ -1,6 +1,7 @@
 let enemy; 
 let weapon; 
 let pnj; 
+let lifepotion;
 
 function Enemy(enemyType, hp, xp, str, spd, gold, wpns) {
     this.enemyType = enemyType;
@@ -30,4 +31,10 @@ function PNJ (pnjType, hp, xp, str, spd, gold, wpns){
     this.spd = spd;
     this.gold = gold;
     this.wpns = wpns;
+}
+
+function lifePotion(){
+    let getPlayerHealth = document.querySelector(".health-player");
+    player.hp = player.hp + 50;
+    getPlayerHealth.innerHTML = 'HP: ' + player.hp;
 }

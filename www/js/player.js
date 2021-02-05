@@ -14,8 +14,8 @@ function Player(classType, hp, xp, str, spd, gold, wpns) {
 // Functions:
 function playerAttack() {
     let calcBaseDamage;
-    calcBaseDamage = player.str + player.xp;
-    console.log("calcBaseDamage");
+    calcBaseDamage = player.str + player.xp + player.wpns;
+    
 
     // Number of hits
     let numberOfHits = Math.floor(Math.random() * Math.floor(3) + player.spd);
@@ -26,7 +26,7 @@ function playerAttack() {
 
 function enemyAttack() {
     let calcBaseDamage;
-    calcBaseDamage = enemy.str + enemy.xp;
+    calcBaseDamage = enemy.str + enemy.xp + enemy.wpns;
 
     // Number of hits
     let numberOfHits = Math.floor(Math.random() * Math.floor(3) + enemy.spd);
