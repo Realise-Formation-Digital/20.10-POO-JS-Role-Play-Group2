@@ -22,7 +22,8 @@ let GameManager = {
         getInterface.innerHTML = '<img src="img/' + classType.toLowerCase() + '.png "class="img-avatar"><div><h3>' +
         classType + '</h3> <p class= "health-player">HP: ' + player.hp + '</p><p>XP: ' + player.xp + '</p><p>Strength: ' + 
         player.str + '</p><p>Endurance: ' + player.end + '</p><p>Gold: ' + player.gold + '</p><p>Weapon Bonus: ' + 
-        player.wpns + '</p></div>' + '<img src="img/inventory.png"> <div><h3>Inventory: </h3><p>Potion de vie</p><p>Baton en bois (+1 str)</p></div>' + '<img src="img/battleinfo.png"><div><h3>Battle info: </h3></div>';
+        player.wpns + '</p></div>' + '<img src="img/inventory.png"> <div><h3>Inventory: </h3><p>Life Potion</p><p>Wooden Stick (+1 str)</p></div>' 
+        + '<img src="img/battleinfo.png"><div class="battleInfo><h3>Battle info: </h3></div>';
     },
     // Create fight screne with arena and actions
     setPreFight: function () {
@@ -31,12 +32,13 @@ let GameManager = {
         //let getActions2 = document.querySelector(".actions");
         let getArena = document.querySelector(".arena");
         getHeader.innerHTML = '<p>Welcome to the Arena hero, what will you do next?</p>';
+        //Generate enemy
         getActions.innerHTML = '<a href="#" class="btn-prefight" onclick="GameManager.setFight()">Start your first fight</a>';
         //getActions2.innerHTML = '<a href="#" class="btn-prefight" onclick="#">Check Inventory</a>';
         getArena.style.visibility = "visible";
     },
 
-    // Create Enemy
+    // Create enemey and choose random one
     setFight: function () {
         let getHeader = document.querySelector(".header");
         let getActions = document.querySelector(".actions");
