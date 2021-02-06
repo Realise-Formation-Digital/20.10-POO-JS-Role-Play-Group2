@@ -15,7 +15,7 @@ function Player(classType, hp, xp, str, spd, gold, wpns) {
 function playerAttack() {
     let calcBaseDamage;
     calcBaseDamage = player.str + player.xp + player.wpns;
-    
+
 
     // Number of hits
     let numberOfHits = Math.floor(Math.random() * Math.floor(3) + player.spd);
@@ -56,7 +56,7 @@ let PlayerMoves = {
         if (getPlayerSpeed >= getEnemySpeed) {
             let totalDamage = playerAttackValues[0] * playerAttackValues[1];
             enemy.hp = enemy.hp - totalDamage;
-            alert("You hit " + playerAttackValues[0] + " damages" + playerAttackValues[1] + " times");
+            alert("You hit " + playerAttackValues[0] + " damages " + playerAttackValues[1] + " times");
 
         } else {
             enemyAttack();
@@ -73,23 +73,28 @@ let PlayerMoves = {
             alert("Next fight");
         } else {
             getEnemyHealth.innerHTML = 'HP: ' + enemy.hp;
-            // Enemy attacks
-            let enemyAttackValues = enemyAttack();
-            let totalDamage = enemyAttackValues[0] * enemyAttackValues[1];
-            player.hp = player.hp - totalDamage;
-            alert("Enemy hit " + playerAttackValues[0] + " damages" + enemyAttackValues[1] + " times");
-            enemyAttack();
-            if (player.hp <= 0) {
-                alert("You Lose Muahahahaaaaaaaa!!!");
-                getPlayerHealth.innerHTML = 'HP: ' + enemy.hp;
-                getEnemyHealth.innerHTML = 'HP: ' + enemy.hp;
-                window.location.reload();
-            } else {
-                getPlayerHealth.innerHTML = 'HP: ' + player.hp;
-                playerAttack();
-            }
+        }
+        // Enemy attacks
+        let enemyAttackValues = enemyAttack();
+        if (getPlayerSpeed < getEnemySpeed) {
+        let totalDamage = enemyAttackValues[0] * enemyAttackValues[1];
+        player.hp = player.hp - totalDamage;
+        alert("Enemy hit " + playerAttackValues[0] + " damages " + enemyAttackValues[1] + " times");
+        } else {
+            getPlayerHealth.innerHTML = 'HP: ' + player.hp;
+        }
+
+        if (player.hp <= 0) {
+            alert("You Lose Muahahahaaaaaaaa!!!");
+            getPlayerHealth.innerHTML = 'HP: ' + enemy.hp;
+            getEnemyHealth.innerHTML = 'HP: ' + enemy.hp;
+            window.location.reload();
+        } else {
+            getPlayerHealth.innerHTML = 'HP: ' + player.hp;
+
         }
     }
-
 }
+
+
 

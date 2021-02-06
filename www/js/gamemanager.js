@@ -6,7 +6,7 @@ let GameManager = {
     resetPlayer: function (classType) {
         switch (classType) {
             case "Link":
-                player = new Player(classType, 100, 0, 10, 2, 30, 0);
+                player = new Player(classType, 400, 0, 10, 2, 30, 0);
                 break;
             case "Merlin":
                 player = new Player(classType, 200, 0, 10, 2, 30, 0);
@@ -28,12 +28,12 @@ let GameManager = {
     setPreFight: function () {
         let getHeader = document.querySelector(".header");
         let getActions = document.querySelector(".actions");
-        //let getActions2 = document.querySelector(".actions");
         let getArena = document.querySelector(".arena");
+        let getfightDetails = document.querySelector(".fightDetails");
         getHeader.innerHTML = '<p>Welcome to the Arena hero, what will you do next?</p>';
         //Generate enemy
-        getActions.innerHTML = '<a href="#" class="btn-prefight" onclick="GameManager.setFight()">Start your first fight</a>';
-        //getActions2.innerHTML = '<a href="#" class="btn-prefight" onclick="#">Check Inventory</a>';
+        getActions.innerHTML = '<a class="btn-prefight" onclick="GameManager.setFight()">Start your first fight</a>';
+        //getfightDetails.style.visibility = "visible";
         getArena.style.visibility = "visible";
     },
 
