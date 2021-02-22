@@ -1,5 +1,6 @@
 <?php
-
+  // Interaction avec la BD (J'ai mit trop de commentaires pour faciliter la lecture aux membres de mon equipe)
+   
   // Définit les constantes de connexion avec la BD
   define("HOST", "maria_db");
   define("PORT", "9000");
@@ -44,7 +45,7 @@
     
   
 
-  // Class Database qui fait tous le quequetes à la BD
+  // Class Database qui fait tous le quequetes à la BD  
   class Database {
 
     private $pdo;
@@ -56,7 +57,7 @@
       $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    // Chercher le jouer dans la base de données le dernier joueur que j'ai inserté
+    // Chercher le jouer dans la base de données le dernier joueur que j'ai inserté  (line 67)
     public function get() {
       try {
         // Prend le joueur.
@@ -135,10 +136,6 @@
     public function save($player) {       // reçoie un joeur 
 
       try {
-        // Vide préalablement les données.
-        //$this->pdo->prepare("DELETE FROM joueur_arme")->execute();
-        //$this->pdo->prepare("DELETE FROM joueur")->execute();
-        //$this->pdo->prepare("DELETE FROM arme")->execute();
 
         // Insérer le joueur = insertar dans la table joeur todos los camos del jugador
         $playerObj = (object) $player;

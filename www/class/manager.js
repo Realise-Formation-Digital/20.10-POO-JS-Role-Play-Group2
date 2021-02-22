@@ -5,7 +5,7 @@ export default class DataManager {
   
     #player = null;
     
-    async getPlayer () {     //cette classe retourne toujoues le dernier ID qui a été inserté dans la BD
+    async getPlayer () {     //cette classe retourne toujoues le dernier ID qui a été inserté dans la BD  (line 67 player.js)
         console.log("[DataManager][getPlayer] Getting data from server with params")
         
         try {
@@ -39,7 +39,7 @@ export default class DataManager {
                 }                 
                 inventory.push(weapon);     // mettre en inventory toutes les armes du jouer et l'arme equipée = arme qui on utilise dans ce moment
               }
-             // convertir ma reponse json à un object player dans ma  clase JS
+         // convertir ma reponse json à un object player dans ma  clase JS
               var player = Player.PlayerFabric(jsonData.id, jsonData.name, jsonData.hp, jsonData.xp, 
                                         jsonData.str, jsonData.end, jsonData.gold, equiped, inventory);
               //console.log(player)

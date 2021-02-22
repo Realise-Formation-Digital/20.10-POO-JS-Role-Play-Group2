@@ -15,7 +15,7 @@ buttonElement.addEventListener('click', () => {
   console.log(player1)
 })
 /**
- * Function starGame qui toujours retourne le dernier ID que j'ai inserté 
+ * Function starGame qui toujours retourne le dernier ID de joueur que j'ai inserté dans la BD 
  */
 export async function startGame() {
   try {
@@ -107,8 +107,7 @@ function showOption(option) {
 function selectOption(option) {
   console.log("[Game][selectOption] Show select option with params", option)
   const nextTextNodeId = option.nextText
-  //if (nextTextNodeId <= 0) {
-  //   return startGame() }
+
 
   switch (nextTextNodeId) {
     case 5: {
@@ -228,7 +227,7 @@ const textNodes = [
 ]
 
 
-async function createPlayer (name) {      // creer le jouer avec la functio qui es en maneger.js (line 54)  et l'enregistrer
+async function createPlayer (name) {      // creer le jouer avec la function qui es en maneger.js (line 54)  et l'enregistrer
   try{
     player1 = await manager.createPlayer(name);     // en player1 est le joueur qui se a créé
 
